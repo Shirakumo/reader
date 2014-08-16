@@ -89,8 +89,8 @@
                         :page 1
                         :has-more (< *app* count))))))
 
-(define-page page #@"reader/^page/" ()
-  (let ((page (1- (or (parse-integer (or (get-var "page") (subseq (path *request*) (length "page/"))) :junk-allowed T) 1))))
+(define-page page #@"reader/^page/([0-9]*)" (:uri-groups (page))
+  (let ((page (1- (or (parse-integer (or (get-var "page") page) :junk-allowed T) 1))))
     (cache-wrapper ("PAGE-~a" page)
       (lquery-wrapper ("index.html")
         (let* ((articles (dm:get 'reader-articles (db:query :all) :sort '(("time" :DESC)) :amount *app* :skip (* *app* page)))
@@ -100,8 +100,8 @@
                           :page (1+ page)
                           :has-more (< (* *app* page) count)))))))
 
-(define-page article #@"reader/^article/" ()
-  (let ((id (or (parse-integer (or (get-var "id") (subseq (path *request*) (length "article/") (position #\- (path *request*)))) :junk-allowed T) -1)))
+(define-page article #@"reader/^article/(([0-9]+)-.*)?" (:uri-groups (NIL id))
+  (let ((id (or (parse-integer (or (get-var "id") id) :junk-allowed T) -1)))
     (cache-wrapper ("ARTICLE-~a" id)
       (lquery-wrapper ("article.html")
         (let* ((article (dm:get-one 'reader-articles (db:query (:= '_id id))))
@@ -117,22 +117,21 @@
                           :prev prev
                           :links (dm:get 'reader-links (db:query :all))))))))
 
-(define-page tag #@"reader/^tagged/" ()
-  (cl-ppcre:register-groups-bind (tag NIL page) ("tagged/([^/]*)(/([0-9]+))?" (path *request*))
-    (let ((tag (sanitize-tag tag))
-          (page (1- (or (parse-integer (or page "") :junk-allowed T) 1))))
-      (cache-wrapper ("TAG-~a-~a" tag page)
-        (lquery-wrapper ("tagged.html")
-          (let ((articles (dm:get 'reader-articles (db:query (:matches 'tags (query-tag tag))) :sort '(("time" :DESC)) :amount *app* :skip (* *app* page)))
-                (count (db:count 'reader-articles (db:query (:matches 'tags (query-tag tag))))))
-            (r-clip:process (lquery:$ (node))
-                            'radiance::tag tag
-                            :articles articles
-                            :page (1+ page)
-                            :has-more (< (* *app* page) count))))))))
+(define-page tag #@"reader/^tagged/([^/]*)(/([0-9]+))?" (:uri-groups (tag NIL page))
+  (let ((tag (sanitize-tag tag))
+        (page (1- (or (parse-integer (or page "") :junk-allowed T) 1))))
+    (cache-wrapper ("TAG-~a-~a" tag page)
+      (lquery-wrapper ("tagged.html")
+        (let ((articles (dm:get 'reader-articles (db:query (:matches 'tags (query-tag tag))) :sort '(("time" :DESC)) :amount *app* :skip (* *app* page)))
+              (count (db:count 'reader-articles (db:query (:matches 'tags (query-tag tag))))))
+          (r-clip:process (lquery:$ (node))
+                          'radiance::tag tag
+                          :articles articles
+                          :page (1+ page)
+                          :has-more (< (* *app* page) count)))))))
 
-(define-page write #@"reader/write/" (:lquery (template "write.html") :access '(reader write))
-  (let* ((id (or (parse-integer (or (post/get "id") (subseq (path *request*) (1+ (or (position #\/ (path *request*)) (length "write"))))) :junk-allowed T) -1))
+(define-page write #@"reader/write/([0-9]*)" (:uri-groups (id) :lquery (template "write.html") :access '(reader write))
+  (let* ((id (or (parse-integer (or (post/get "id") id) :junk-allowed T) -1))
          (article (or (dm:get-one 'reader-articles (db:query (:= '_id id))) (dm:hull 'reader-articles)))
          (action (or (post-var "action") "noop"))
          (message))
