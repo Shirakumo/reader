@@ -378,11 +378,7 @@ article footer #move .next{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 );
 }
 
-
-
-
-
-@media only screen and (max-device-width: 900px){
+@media (max-width: 800px){
     article{
         padding: 24px 0 0 0;
     }
