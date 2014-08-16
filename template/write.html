@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Write - Reader</title>
+    <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body>
+    <form action="#" method="post">
+      <using field=":article">
+        <input type="hidden" name="id" value="" lquery="(val (princ-to-string _id))" />
+        <article>
+          <header>
+            <div>
+              <a href="#" id="author-avatar" lquery="(attr :href (profile:page author))">
+                <img src="" lquery="(attr :src (profile:avatar author 96))" alt="Avatar" />
+              </a>
+              <div>
+                <h1><input type="text" name="title" placeholder="Title" lquery="(val title)" required="required" /></h1>
+                <input id="taginput" type="text" name="tags" placeholder="tag, another tag" lquery="(val tags)" />
+              </div>
+              <a href="/" id="index-link">Index</a>
+            </div>
+          </header>
+          <section id="writer-body">
+            <div id="message" />
+            <textarea name="text" lquery="(text text)" required="required"></textarea>
+            <nav id="buttons">
+              <input class="save" type="submit" name="action" value="Save" />
+              <when test="(not (dm::hull-p *))">
+                <input class="delete" type="submit" name="action" value="Delete" />
+              </when>
+            </nav>
+          </section>
+        </article>
+      </using>
+    </form>
+  </body>
+</html>

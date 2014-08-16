@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Reader</title>
+    <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body>
+    <article>
+      <header>
+        <div>
+          <h1>Reader</h1>
+          <a href="/" id="index-link">Index</a>
+        </div>
+      </header>
+      <section id="generic-body">
+        <ul iterate=":articles" class="article-listing">
+          <li>
+            <article>
+              <header>
+                <h2><a href="#" lquery="(text title) (attr :href (reader::article-url _id))">LINK</a></h2>
+                <div class="date" lquery="(text (reader::format-time time))">20xx.xx.xx</div>
+              </header>
+              <blockquote lquery="(html (reader::excerpt text))">
+                TEXT
+              </blockquote>
+              <br style="clear:both;" />
+            </article>
+          </li>
+        </ul>
+      </section>
+      <footer>
+        <nav id="move">
+          <when test="(< 1 :page)">
+            <a href="#" class="prev" lquery="(attr :href (format NIL &quot;/page/~a&quot; (1- :page)))">Newer Entries</a>
+          </when>
+          <when test=":has-more">
+            <a href="#" class="next" lquery="(attr :href (format NIL &quot;/page/~a&quot; (1+ :page)))">Older Entries</a>
+          </when>
+        </nav>
+      </footer>
+    </article>
+  </body>
+</html>
