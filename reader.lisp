@@ -100,8 +100,8 @@
                           :page (1+ page)
                           :has-more (< (* *app* page) count)))))))
 
-(define-page article #@"reader/^article/(([0-9]+)-.*)?" (:uri-groups (NIL id))
-  (let ((id (or (parse-integer (or (get-var "id") id) :junk-allowed T) -1)))
+(define-page article #@"reader/^article/(([0-9]+)(-.*))?" (:uri-groups (NIL id))
+  (let ((id (or (parse-integer (or (get-var "id") id "") :junk-allowed T) -1)))
     (cache-wrapper ("ARTICLE-~a" id)
       (lquery-wrapper ("article.html")
         (let* ((article (dm:get-one 'reader-articles (db:query (:= '_id id))))
