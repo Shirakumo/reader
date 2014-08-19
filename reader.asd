@@ -8,7 +8,8 @@
 (asdf:defsystem #:reader
   :defsystem-depends-on (:radiance)
   :class "radiance:module"
-  :components ((:file "reader"))
+  :components ((:file "reader")
+               (:file "atom"))
   :depends-on ((:interface :database)
                (:interface :data-model)
                (:interface :auth)

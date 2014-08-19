@@ -5,6 +5,8 @@
     <title><splice lquery="(text tag)"></splice> Tag Search - Reader</title>
     <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
     <meta name="viewport" content="width=device-width" />
+    <link href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="TAG Atom Feed"
+          lquery="(attr :href (reader::atom-url tag) :title (format NIL &quot;~a Atom Feed&quot; tag))"/>
   </head>
   <body>
     <article>
