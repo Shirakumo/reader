@@ -38,6 +38,7 @@ article header h1{
     vertical-align: middle;
     margin: 0; padding: 0;
     font-size: 24pt;
+    text-align: left;
 }
 
 article header h1 a{
@@ -173,6 +174,7 @@ article header #index-link{
 #article-body .series a{
     display: inline-block;
     padding: 0 10px 0 10px;
+    margin: 2px 0 0 0;
     color: #FFF;
     background: #151515;
     text-decoration: none;
