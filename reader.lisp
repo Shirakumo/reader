@@ -167,3 +167,8 @@
         (lquery:$ "#message" (html message))
         (lquery:$ "#message" (remove)))
     (r-clip:process (lquery:$ (node)) :article article :message message)))
+
+;; default route
+(define-route blog (("blog") * *)
+  (setf (domains uri) '("reader"))
+  uri)
