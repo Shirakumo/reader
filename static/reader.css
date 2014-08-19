@@ -197,6 +197,16 @@ article header #index-link{
     box-sizing: border-box;
 }
 
+#article-body img.left{
+    float:left;
+    max-width: 30%;
+}
+
+#article-body img.right{
+    float:right;
+    max-width: 30%;
+}
+
 #article-body code{
     font-family: Consolas, Iconsolata, monospace;
     display: inline-block;
