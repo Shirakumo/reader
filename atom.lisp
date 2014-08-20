@@ -34,7 +34,6 @@
                                       (if tag
                                           (db:query (:matches 'tags (query-tag tag)))
                                           (db:query :all)) :amount *entry-count* :sort '((time :DESC))))))
-               (v:info :atom "~a" articles)
                (r-clip:process (lquery:$ (node))
                                :updated (if articles (dm:field (first articles) "time") -1)
                                :articles articles
