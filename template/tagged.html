@@ -2,9 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8"/>
-    <title><splice lquery="(text tag)"></splice> Tag Search - Reader</title>
-    <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
+    <title><splice lquery="(text tag)"></splice> Tag Search - <splice lquery="(text (clipboard ':description))"></splice></title>
     <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Reader Blog" lquery="(attr :content (clipboard ':description))" />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
     <link href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="TAG Atom Feed"
           lquery="(attr :href (reader::atom-url tag) :title (format NIL &quot;~a Atom Feed&quot; tag))"/>
   </head>

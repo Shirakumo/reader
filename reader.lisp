@@ -87,7 +87,9 @@
         (r-clip:process (lquery:$ (node))
                         :articles articles
                         :page 1
-                        :has-more (< *app* count))))))
+                        :has-more (< *app* count)
+                        :title (config-tree :reader :title)
+                        :description (config-tree :reader :description))))))
 
 (define-page page #@"reader/^page/([0-9]*)" (:uri-groups (page))
   (let ((page (1- (or (parse-integer (or (get-var "page") page) :junk-allowed T) 1))))
@@ -98,7 +100,9 @@
           (r-clip:process (lquery:$ (node))
                           :articles articles
                           :page (1+ page)
-                          :has-more (< (* *app* page) count)))))))
+                          :has-more (< (* *app* page) count)
+                          :title (config-tree :reader :title)
+                          :description (config-tree :reader :description)))))))
 
 (define-page article #@"reader/^article/(([0-9]+)(-.*)?)?" (:uri-groups (NIL id))
   (let ((id (or (parse-integer (or (get-var "id") id "") :junk-allowed T) -1)))
@@ -115,7 +119,9 @@
                           :article article
                           :next next
                           :prev prev
-                          :links (dm:get 'reader-links (db:query :all))))))))
+                          :links (dm:get 'reader-links (db:query :all))
+                          :title (config-tree :reader :title)
+                          :description (config-tree :reader :description)))))))
 
 (define-page tag #@"reader/^tagged/([^/]*)(/([0-9]+))?" (:uri-groups (tag NIL page))
   (let ((tag (sanitize-tag tag))
@@ -128,7 +134,9 @@
                           'radiance::tag tag
                           :articles articles
                           :page (1+ page)
-                          :has-more (< (* *app* page) count)))))))
+                          :has-more (< (* *app* page) count)
+                          :title (config-tree :reader :title)
+                          :description (config-tree :reader :description)))))))
 
 (define-page write #@"reader/write/([0-9]*)" (:uri-groups (id) :lquery (template "write.html") :access '(reader write))
   (let* ((id (or (parse-integer (or (post/get "id") id) :junk-allowed T) -1))
@@ -166,7 +174,11 @@
     (if message
         (lquery:$ "#message" (html message))
         (lquery:$ "#message" (remove)))
-    (r-clip:process (lquery:$ (node)) :article article :message message)))
+    (r-clip:process (lquery:$ (node))
+                    :article article
+                    :message message
+                    :title (config-tree :reader :title)
+                    :description (config-tree :reader :description))))
 
 ;; default route
 (define-route blog (("blog") * *)

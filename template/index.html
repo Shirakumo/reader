@@ -2,16 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8"/>
-    <title>Reader</title>
-    <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
+    <title lquery="(text (clipboard ':title))">Reader</title>
     <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Reader Blog" lquery="(attr :content (clipboard ':description))" />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
     <link href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="Reader Atom Feed" />
   </head>
   <body>
     <article>
       <header>
         <div>
-          <h1>Reader</h1>
+          <h1 lquery="(text (clipboard ':title))">Reader</h1>
+          <span id="" lquery="(text (clipboard ':description))">Description</span>
           <a href="/" id="index-link">Index</a>
         </div>
       </header>
