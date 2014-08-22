@@ -223,6 +223,7 @@ article header #index-link{
     border-right: none;
 }
 
+#article-body code .code{background:#FFF;}
 #article-body code .comment{color:#555;}
 #article-body code .symbol{color:#000;text-decoration: none;}
 #article-body code i .symbol{color:#880000;font-style: normal;}
