@@ -37,7 +37,7 @@
                (r-clip:process (lquery:$ (node))
                                :updated (if articles (dm:field (first articles) "time") -1)
                                :articles articles
-                               :tag tag
+                               :tag (when tag (urlencode:urlencode tag))
                                :domain (domain *request*)
                                :title (config-tree :reader :title)
                                :description (config-tree :reader :description))))))

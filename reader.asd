@@ -19,4 +19,5 @@
                :r-clip
                :3bmd
                :3bmd-ext-code-blocks
-               :cl-ppcre))
+               :cl-ppcre
+               :do-urlencode))
