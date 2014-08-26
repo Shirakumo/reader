@@ -26,7 +26,7 @@
         <when test="homepage"><uri lquery="(text homepage)">http://example.org/</uri></when>
         <when test="email"><email lquery="(text email)">author@example.com</email></when>
       </author>
-      <content type="html" lquery="(text (reader::excerpt text))">
+      <content type="html" lquery="(text (reader::parse text))">
         EXCERPT
       </content>
     </entry>
