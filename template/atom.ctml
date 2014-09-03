@@ -1,19 +1,19 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title type="text" lquery="(text (clipboard ':title))">TITLE</title>
-  <subtitle type="html" lquery="(text (clipboard ':description))">
+  <title type="text" lquery="(text title)">TITLE</title>
+  <subtitle type="html" lquery="(text description)">
     DESCRIPTION
   </subtitle>
-  <updated lquery="(text (reader::atom-time :updated))"></updated>
-  <id>http://reader.<splice lquery="(text (clipboard ':domain))"></splice>/</id>
+  <updated lquery="(text (reader::atom-time updated))"></updated>
+  <id>http://reader.<c:splice lquery="(text domain)" />/</id>
   <link rel="alternate" type="text/html" hreflang="en" href="http://reader.DOMAIN/"
-        lquery="(attr :href (format NIL &quot;http://reader.~a/&quot; :domain))"/>
+        lquery="(attr :href (format NIL &quot;http://reader.~a/&quot; domain))"/>
   <link rel="self" type="application/atom+xml" href="http://reader.DOMAIN/api/reader/atom"
-        lquery="(attr :href (format NIL &quot;http://reader.~a/api/reader/atom~@[?tag=~a~]&quot; :domain :tag))"/>
+        lquery="(attr :href (format NIL &quot;http://reader.~a/api/reader/atom~@[?tag=~a~]&quot; domain tag))"/>
   <rights>Copyright (c) 2014, TymoonNET/NexT</rights>
   <generator uri="http://github.com/Shinmera/radiance-reader/" version="1.0">
     radiance-reader
   </generator>
-  <splice iterate=":articles">
+  <c:splice iterate="articles">
     <entry>
       <title lquery="(text title)">TITLE</title>
       <link rel="alternate" type="text/html" href="http://reader.DOMAIN/article/ID"
@@ -23,12 +23,12 @@
       <updated lquery="(text (reader::atom-time time))">TIME</updated>
       <author>
         <name lquery="(text author)">AUTHOR</name>
-        <when test="homepage"><uri lquery="(text homepage)">http://example.org/</uri></when>
-        <when test="email"><email lquery="(text email)">author@example.com</email></when>
+        <c:when test="homepage"><uri lquery="(text homepage)">http://example.org/</uri></c:when>
+        <c:when test="email"><email lquery="(text email)">author@example.com</email></c:when>
       </author>
       <content type="html" lquery="(text (reader::parse text))">
         EXCERPT
       </content>
     </entry>
-  </splice>
+  </c:splice>
 </feed>

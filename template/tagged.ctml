@@ -2,24 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8"/>
-    <title lquery="(text (clipboard ':title))">Reader</title>
+    <title><c:splice lquery="(text tag)" /> Tag Search - <c:splice lquery="(text title)" /></title>
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Reader Blog" lquery="(attr :content (clipboard ':description))" />
+    <meta name="description" content="Reader Blog" lquery="(attr :content description)" />
     <meta name="robots" content="index, follow" />
     <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
-    <link href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="Reader Atom Feed" />
+    <link href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="TAG Atom Feed"
+          lquery="(attr :href (reader::atom-url tag) :title (format NIL &quot;~a Atom Feed&quot; tag))"/>
   </head>
   <body>
     <article>
       <header>
         <div>
-          <h1 lquery="(text (clipboard ':title))">Reader</h1>
-          <span id="" lquery="(text (clipboard ':description))">Description</span>
+          <h1>Posts Tagged <span lquery="(text tag)">TAG</span></h1>
           <a href="/" id="index-link">Index</a>
         </div>
       </header>
       <section id="generic-body">
-        <ul iterate=":articles" class="article-listing">
+        <ul iterate="articles" class="article-listing">
           <li>
             <article>
               <header>
@@ -36,12 +36,12 @@
       </section>
       <footer>
         <nav id="move">
-          <when test="(< 1 :page)">
-            <a href="#" class="prev" lquery="(attr :href (format NIL &quot;/page/~a&quot; (1- :page)))">Newer Entries</a>
-          </when>
-          <when test=":has-more">
-            <a href="#" class="next" lquery="(attr :href (format NIL &quot;/page/~a&quot; (1+ :page)))">Older Entries</a>
-          </when>
+          <c:when test="(< 1 page)">
+            <a href="#" class="prev" lquery="(attr :href (format NIL &quot;/tagged/~a/~a&quot; tag (1- page)))">Newer Entries</a>
+          </c:when>
+          <c:when test="has-more">
+            <a href="#" class="next" lquery="(attr :href (format NIL &quot;/tagged/~a/~a&quot; tag (1+ page)))">Older Entries</a>
+          </c:when>
         </nav>
       </footer>
     </article>

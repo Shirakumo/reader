@@ -2,16 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8"/>
-    <title><splice lquery="(text (clip :article 'title))"></splice> - <splice lquery="(text (clipboard ':title))"></splice></title>
+    <title><c:splice lquery="(text (clip article 'title))" /> - <c:splice lquery="(text title)" /></title>
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Reader Blog" lquery="(attr :content (clipboard ':description))" />
+    <meta name="description" content="Reader Blog" lquery="(attr :content description)" />
     <meta name="robots" content="index, follow" />
     <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
     <link href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="Reader Atom Feed" />
   </head>
   <body>
     <article>
-      <using field=":article">
+      <c:using value="article">
         <header>
           <div>
             <a href="#" id="author-avatar" lquery="(attr :href (profile:page author))">
@@ -34,15 +34,15 @@
                 This article is a part of the series <span class="series-title" lquery="(text title)">TITLE</span>.
               </div>
               <div class="links">
-                <when test=":first">
-                  <a class="first" href="#" lquery="(attr :href (reader::article-url (clip :first '_id))) (text (clip :first 'title))">First</a>
-                </when>
-                <when test=":prev">
-                  <a class="prev" href="#" lquery="(attr :href (reader::article-url (clip :prev '_id))) (text (clip :prev 'title))">Previous</a>
-                </when>
-                <when test=":next">
-                  <a class="next" href="#" lquery="(attr :href (reader::article-url (clip :next '_id))) (text (clip :next 'title))">Next</a>
-                </when>
+                <c:when test="first">
+                  <a class="first" href="#" lquery="(attr :href (reader::article-url (clip first '_id))) (text (clip first 'title))">First</a>
+                </c:when>
+                <c:when test="prev">
+                  <a class="prev" href="#" lquery="(attr :href (reader::article-url (clip prev '_id))) (text (clip prev 'title))">Previous</a>
+                </c:when>
+                <c:when test="next">
+                  <a class="next" href="#" lquery="(attr :href (reader::article-url (clip next '_id))) (text (clip next 'title))">Next</a>
+                </c:when>
               </div>
             </nav>
           </div>
@@ -50,15 +50,15 @@
             TEXT
           </blockquote>
         </section>
-      </using>
+      </c:using>
       <footer>
         <nav id="move">
-          <when test=":prev">
-            <a class="prev" href="#" lquery="(attr :href (reader::article-url (clip :prev '_id))) (text (clip :prev 'title))">Previous</a>
-          </when>
-          <when test=":next">
-            <a class="next" href="#" lquery="(attr :href (reader::article-url (clip :next '_id))) (text (clip :next 'title))">Next</a>
-          </when>
+          <c:when test="prev">
+            <a class="prev" href="#" lquery="(attr :href (reader::article-url (clip prev '_id))) (text (clip prev 'title))">Previous</a>
+          </c:when>
+          <c:when test="next">
+            <a class="next" href="#" lquery="(attr :href (reader::article-url (clip next '_id))) (text (clip next 'title))">Next</a>
+          </c:when>
         </nav>
         <nav id="default-linkage">
           <ul iterate="links">

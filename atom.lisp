@@ -24,7 +24,7 @@
         (cache-wrapper ("READER-ATOM-~a" tag)
           (format
            NIL "<?xml version=\"1.0\" encoding=\"utf-8\"?>~%~a"
-           (lquery-wrapper ("atom.xml")
+           (lquery-wrapper ("atom.ctml")
              (let ((articles (mapc
                               #'(lambda (article)
                                   (let ((author (user:get (dm:field article "author"))))

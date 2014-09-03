@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8"/>
-    <title>Write - <splice lquery="(text (clipboard ':title))"></splice></title>
+    <title>Write - <c:splice lquery="(text title)" /></title>
     <meta name="viewport" content="width=device-width" />
     <meta name="robots" content="noindex, nofollow" />
     <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
   </head>
   <body>
     <form action="#" method="post">
-      <using field=":article">
+      <c:using value="article">
         <input type="hidden" name="id" value="" lquery="(val (princ-to-string _id))" />
         <article>
           <header>
@@ -29,13 +29,13 @@
             <textarea name="text" lquery="(text text)" required="required"></textarea>
             <nav id="buttons">
               <input class="save" type="submit" name="action" value="Save" />
-              <when test="(not (dm::hull-p *))">
+              <c:when test="(not (dm::hull-p *))">
                 <input class="delete" type="submit" name="action" value="Delete" />
-              </when>
+              </c:when>
             </nav>
           </section>
         </article>
-      </using>
+      </c:using>
     </form>
   </body>
 </html>
