@@ -179,8 +179,3 @@
                     :message message
                     :title (config-tree :reader :title)
                     :description (config-tree :reader :description))))
-
-;; default route
-(define-route blog (("blog") * *)
-  (setf (domains uri) '("reader"))
-  uri)
