@@ -8,6 +8,10 @@
 (asdf:defsystem #:reader
   :defsystem-depends-on (:radiance)
   :class "radiance:module"
+  :author "Nicolas Hafner <shinmera@tymoon.eu>"
+  :maintainer "Nicolas Hafner <shinmera@tymoon.eu>"
+  :version "1.1.2"
+  :description "A simple blogging platform for Radiance."
   :components ((:file "reader")
                (:file "atom"))
   :depends-on ((:interface :database)
