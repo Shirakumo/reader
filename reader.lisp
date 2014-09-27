@@ -138,7 +138,7 @@
                           :title (config-tree :reader :title)
                           :description (config-tree :reader :description)))))))
 
-(define-page write #@"reader/write/([0-9]*)" (:uri-groups (id) :lquery (template "write.ctml") :access '(reader write))
+(define-page write #@"reader/write/([0-9]*)" (:uri-groups (id) :lquery (template "write.ctml") :access (reader write))
   (let* ((id (or (parse-integer (or (post/get "id") id) :junk-allowed T) -1))
          (article (or (dm:get-one 'reader-articles (db:query (:= '_id id))) (dm:hull 'reader-articles)))
          (action (or (post-var "action") "noop"))
