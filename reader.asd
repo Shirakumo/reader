@@ -11,7 +11,9 @@
   :author "Nicolas Hafner <shinmera@tymoon.eu>"
   :maintainer "Nicolas Hafner <shinmera@tymoon.eu>"
   :version "1.1.2"
+  :license "Artistic"
   :description "A simple blogging platform for Radiance."
+  :homepage "https://github.com/Shinmera/reader"
   :components ((:file "reader")
                (:file "atom"))
   :depends-on ((:interface :database)
