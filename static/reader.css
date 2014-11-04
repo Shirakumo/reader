@@ -209,6 +209,12 @@ article header #index-link{
     max-width: 30%;
 }
 
+#article-body img.side{
+    position: absolute;
+    right: 0;
+    max-width: 180px;
+}
+
 #article-body code{
     font-family: Consolas, Iconsolata, monospace;
     display: inline-block;
@@ -465,6 +471,10 @@ article footer #move .next{
 
     #article-body blockquote{
         margin: 0;
+    }
+    
+    #article-body img.side{
+        display: none;
     }
 
     #writer-body textarea{
