@@ -79,7 +79,7 @@
      (setf (content-type *response*) "application/xhtml+xml")
      (lquery:$ (serialize) (node))))
 
-(define-page index #@"reader/^$" ()
+(define-page index #@"reader/" ()
   (cache-wrapper ("READER-INDEX")
     (lquery-wrapper ("index.ctml")
       (let* ((articles (dm:get 'reader-articles (db:query :all) :sort '(("time" :DESC)) :amount *app*))
@@ -91,7 +91,7 @@
                         :title (config-tree :reader :title)
                         :description (config-tree :reader :description))))))
 
-(define-page page #@"reader/^page/([0-9]*)" (:uri-groups (page))
+(define-page page #@"reader/page/([0-9]*)" (:uri-groups (page))
   (let ((page (1- (or (parse-integer (or (get-var "page") page) :junk-allowed T) 1))))
     (cache-wrapper ("PAGE-~a" page)
       (lquery-wrapper ("index.ctml")
@@ -104,7 +104,7 @@
                           :title (config-tree :reader :title)
                           :description (config-tree :reader :description)))))))
 
-(define-page article #@"reader/^article/(([0-9]+)(-.*)?)?" (:uri-groups (NIL id))
+(define-page article #@"reader/article/(([0-9]+)(-.*)?)?" (:uri-groups (NIL id))
   (let ((id (or (parse-integer (or (get-var "id") id "") :junk-allowed T) -1)))
     (cache-wrapper ("ARTICLE-~a" id)
       (lquery-wrapper ("article.ctml")
@@ -123,7 +123,7 @@
                           :title (config-tree :reader :title)
                           :description (config-tree :reader :description)))))))
 
-(define-page tag #@"reader/^tagged/([^/]*)(/([0-9]+))?" (:uri-groups (tag NIL page))
+(define-page tag #@"reader/tagged/([^/]*)(/([0-9]+))?" (:uri-groups (tag NIL page))
   (let ((tag (sanitize-tag tag))
         (page (1- (or (parse-integer (or page "") :junk-allowed T) 1))))
     (cache-wrapper ("TAG-~a-~a" tag page)
