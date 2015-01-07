@@ -5,6 +5,7 @@ html{
 body{
     margin: 0; padding: 0;
     font-family: Arial, sans-serif;
+    font-size: 12pt;
 }
 
 article{
@@ -74,7 +75,7 @@ article header #tags ul li a{
     text-decoration: none;
     background-color: #0088EE;
     padding: 2px 5px 2px 5px;
-    font-size: 10pt;
+    font-size: 0.8em;
     margin: 2px 2px 2px 2px;
     border: none;
     cursor: pointer;
@@ -110,7 +111,6 @@ article header #index-link{
     position: absolute;
     left: 0px;
     top: -25px;
-    font-size: 12pt;
     display: inline-block;
     color: #FFF;
     background: #0088EE;
@@ -119,19 +119,36 @@ article header #index-link{
     padding: 5px 5px 5px 85px;
 }
 
-#article-body,#writer-body,#generic-body{
-    max-width: 800px;
-    margin: 0 auto 0 auto;
-    background: #EEE;
-    padding: 5px 150px 10px 20px;
-    box-sizing: border-box;
+/* Font stuff */
+#article-body,#writer-body,#writer-body textarea,#generic-body{
     text-align: justify;
-    border: 1px solid #0088EE;
-    border-top: none;
-    border-bottom: none;
+    color: #444;
+    background: #FFF;
     font-family: Georgia,Serif;
     font-size: 12pt;
     line-height: 120%;
+    text-rendering: optimizeLegibility;
+    -moz-font-feature-settings: "kern" 1, "liga" 1;
+    -ms-font-feature-settings: "kern" 1, "liga" 1; 
+    -o-font-feature-settings: "kern" 1, "liga" 1; 
+    -webkit-font-feature-settings: "kern" 1, "liga" 1; 
+    font-feature-settings: "kern" 1, "liga" 1;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+#article-body,#writer-body,#generic-body{
+    max-width: 800px;
+    margin: 0 auto 0 auto;
+    padding: 5px 150px 10px 20px;
+    box-sizing: border-box;
+    border: 1px solid #0088EE;
+    border-top: none;
+    border-bottom: none;
     position: relative;
 }
 
@@ -163,7 +180,6 @@ article header #index-link{
 }
     
 #article-body .series .description{
-    font-size: 12pt;
     margin-bottom: 5px;
 }
 
@@ -220,6 +236,8 @@ article header #index-link{
     display: inline-block;
     background: #FFF;
     padding: 0 3px 0 3px;
+    word-break: keep-all;
+    hyphens: none;
 }
 
 #article-body pre code{
@@ -246,7 +264,6 @@ article header #index-link{
     min-width: 100%;
     min-height: 500px;
     box-sizing: border-box;
-    background: #EEE;
     border: 1px solid #DDD;
 }
 
@@ -483,5 +500,28 @@ article footer #move .next{
 
     article footer{
         max-width: none;
+    }
+}
+
+@media (min-width: 1200px){
+    
+    body{
+        font-size: 16pt;
+    }
+    
+    article header h1{
+        font-size: 30pt;
+    }
+    
+    article header>div{
+        max-width: 900px;
+    }
+
+    #article-body,#writer-body,#writer-body textarea,#generic-body{
+        font-size: 16pt;
+    }
+    
+    #article-body,#writer-body,#generic-body,article footer{
+        max-width: 1000px;
     }
 }
