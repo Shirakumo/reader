@@ -12,11 +12,8 @@
   (local-time:format-timestring
    NIL (local-time:universal-to-timestamp time)))
 
-(defun atom-article-url (id)
-  (format NIL "http://reader.~a/article/~a" (domain *request*) id))
-
 (defun atom-url (tag)
-  (format NIL "/api/reader/atom?tag=~a" tag))
+  (external-pattern "/api/reader/atom?tag={0}" tag))
 
 (define-api reader/atom (&optional tag) ()
   (let ((tag (and tag (sanitize-tag tag))))

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Reader Blog" lquery="(attr :content description)" />
     <meta name="robots" content="index, follow" />
-    <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
-    <link href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="Reader Atom Feed" />
+    <link rel="stylesheet" type="text/css" @href="/static/reader/reader.css" />
+    <link @href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="Reader Atom Feed" />
   </head>
   <body>
     <article>
@@ -24,7 +24,7 @@
                 <li><a href="#" lquery="(attr :href (reader::tag-url *)) (text *)">TAG</a></li>
               </ul>
             </nav>
-            <a href="/" id="index-link">Index</a>
+            <a @href="reader/" id="index-link">Index</a>
           </div>
         </header>
         <section id="article-body">

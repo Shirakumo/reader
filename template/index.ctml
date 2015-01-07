@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Reader Blog" lquery="(attr :content description)" />
     <meta name="robots" content="index, follow" />
-    <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
-    <link href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="Reader Atom Feed" />
+    <link rel="stylesheet" type="text/css" @href="/static/reader/reader.css" />
+    <link @href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="Reader Atom Feed" />
   </head>
   <body>
     <article>
@@ -15,7 +15,7 @@
         <div>
           <h1 lquery="(text title)">Reader</h1>
           <span id="" lquery="(text description)">Description</span>
-          <a href="/" id="index-link">Index</a>
+          <a @href="reader/" id="index-link">Index</a>
         </div>
       </header>
       <section id="generic-body">
@@ -37,10 +37,10 @@
       <footer>
         <nav id="move">
           <c:when test="(< 1 page)">
-            <a href="#" class="prev" lquery="(attr :href (format NIL &quot;/page/~a&quot; (1- page)))">Newer Entries</a>
+            <a @href='(#?"/page/{0}" (1- page))' class="prev">Newer Entries</a>
           </c:when>
           <c:when test="has-more">
-            <a href="#" class="next" lquery="(attr :href (format NIL &quot;/page/~a&quot; (1+ page)))">Older Entries</a>
+            <a @href='(#?"/page/{0}" (1+ page))' class="next">Older Entries</a>
           </c:when>
         </nav>
       </footer>

@@ -5,7 +5,7 @@
     <title>Write - <c:splice lquery="(text title)" /></title>
     <meta name="viewport" content="width=device-width" />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="stylesheet" type="text/css" href="/static/reader/reader.css" />
+    <link rel="stylesheet" type="text/css" @href="/static/reader/reader.css" />
   </head>
   <body>
     <form action="#" method="post">
@@ -21,7 +21,7 @@
                 <h1><input type="text" name="title" placeholder="Title" lquery="(val title)" required="required" tabindex="1" autofocus="true" /></h1>
                 <input id="taginput" type="text" name="tags" placeholder="tag, another tag" lquery="(val tags)" tabindex="2" />
               </div>
-              <a href="/" id="index-link" tabindex="-1">Index</a>
+              <a @href="reader/" id="index-link" tabindex="-1">Index</a>
             </div>
           </header>
           <section id="writer-body">
