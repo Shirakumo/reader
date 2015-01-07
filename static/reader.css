@@ -236,7 +236,11 @@ article header #index-link{
     display: inline-block;
     background: #FFF;
     padding: 0 3px 0 3px;
+    word-break: normal;
+    -ms-word-break: keep-all;
     word-break: keep-all;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
     hyphens: none;
 }
 
@@ -245,6 +249,9 @@ article header #index-link{
     border: 1px solid #0088EE;
     border-left: none;
     border-right: none;
+    font-size: 0.8em;
+    overflow-x: auto;
+    margin-right: -120px;
 }
 
 #article-body code .code{background:#FFF;}
@@ -496,6 +503,10 @@ article footer #move .next{
 
     #writer-body textarea{
         min-height: 70vh;
+    }
+    
+    #article-body pre code{
+        margin-right: 0;
     }
 
     article footer{
