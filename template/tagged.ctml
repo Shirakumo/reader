@@ -37,10 +37,10 @@
       <footer>
         <nav id="move">
           <c:when test="(< 1 page)">
-            <a @href='(#?"/page/{0}" (1- page))' class="prev">Newer Entries</a>
+            <a @href='(#?"reader/page/{0}" (1- page))' class="prev">Newer Entries</a>
           </c:when>
           <c:when test="has-more">
-            <a @href='(#?"/page/{0}" (1+ page))' class="next">Older Entries</a>
+            <a @href='(#?"reader/page/{0}" (1+ page))' class="next">Older Entries</a>
           </c:when>
         </nav>
       </footer>
