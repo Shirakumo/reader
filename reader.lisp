@@ -179,3 +179,8 @@
                     :message message
                     :title (config-tree :reader :title)
                     :description (config-tree :reader :description))))
+
+(define-page web-fonts (#@"/static/reader/wf/(.+)" 1001) (:uri-groups (path))
+  (setf (header "Cache-Control") "public, max-age=31536000")
+  (setf (header "Access-Control-Allow-Origin") (string-right-trim "/" (uri-to-url #@"reader/" :representation :external)))
+  (serve-file (static-file (format NIL "wf/~a" path))))
