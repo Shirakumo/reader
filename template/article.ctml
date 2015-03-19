@@ -50,7 +50,7 @@
             TEXT
           </c:noop>
           <div class="notice">
-              Written by <a href="#" id="author-avatar" lquery="(attr :href (profile:page author) :title author) (text author)">AUTHOR</a>
+              Written by <a @href='(#?"<profile:user;{0}>" author)' id="author-avatar" lquery="(attr :title author) (text author)">AUTHOR</a>
           </div>
         </section>
       </c:using>
