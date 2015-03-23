@@ -14,7 +14,7 @@
       <c:using value="article">
         <header>
           <div>
-            <a href="#" id="author-avatar" lquery="(attr :href (profile:page author) :title author)">
+            <a @href='(#?"<profile:user;{0}>" author)' id="author-avatar" lquery="(attr :title author)">
               <img src="" lquery="(attr :src (profile:avatar author 96))" alt="Avatar" />
             </a>
             <h1><a href="#" lquery="(attr :href (reader::article-url _id)) (text title)">TITLE</a></h1>

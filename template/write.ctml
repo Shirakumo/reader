@@ -14,7 +14,7 @@
         <article>
           <header>
             <div>
-              <a href="#" id="author-avatar" lquery="(attr :href (profile:page (or author (auth:current))))" tabindex="-1">
+              <a @href='(#?"<profile:user;{0}>" (or author (auth:current)))' id="author-avatar" tabindex="-1">
                 <img src="" lquery="(attr :src (profile:avatar (or author (auth:current)) 96))" alt="Avatar" />
               </a>
               <div>
