@@ -45,7 +45,7 @@
    *cache*))
 
 (defun show-cache (type thing &optional page)
-  (serve-file (cache-file type thing page) "application/xhtml+xml")
+  (serve-file (cache-file type thing page) "application/xhtml+xml; charset=utf-8")
   NIL)
 
 (defun partition (set n)
