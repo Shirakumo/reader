@@ -21,3 +21,4 @@
 
 (define-hook article-updated (article))
 (define-hook article-deleted (article))
+(define-hook recache-all (articles))

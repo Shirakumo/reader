@@ -154,18 +154,27 @@
        :description (config-tree :reader :description)))))
 
 (defun recache-all ()
-  (let ((articles (dm:get 'reader-articles (db:query :all) :sort '((time :DESC))))
-        (tags ()))
+  (trigger 'recache-all (dm:get 'reader-articles (db:query :all) :sort '((time :DESC)))))
+
+(define-trigger (recache-all 'reader-cache) (articles)
+  (let ((tags ()))
     (format T "~&Recaching articles (~d)~%" (length articles))
-    (dolist (article articles)
-      (recache-article article T)
-      (dolist (tag (article-tags article))
-        (pushnew tag tags :test #'string-equal)))
+    (loop for article in articles
+          for i from 1
+          do (when (= 0 (mod i 50))
+               (format T "~&..~d~%" i))
+             (recache-article article T)
+             (dolist (tag (article-tags article))
+               (pushnew tag tags :test #'string-equal)))
     (format T "~&Recaching tags (~d)~%" (length tags))
-    (dolist (tag tags)
-      (recache-tag tag))
+    (loop for tag in tags
+          for i from 1
+          do (when (= 0 (mod i 50))
+               (format T "~&..~d~%" i))
+             (recache-tag tag))
     (format T "~&Recaching index~%")
-    (recache-index)))
+    (recache-index)
+    (trigger 'recache-all articles)))
 
 (define-trigger (article-updated 'reader-cache) (article)
   (recache-article article T)
