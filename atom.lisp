@@ -15,27 +15,41 @@
 (defun atom-url (tag)
   (external-pattern "/api/reader/atom?tag={0}" tag))
 
+(defun recache-atom (&optional tag)
+  (let ((articles (mapc
+                   #'(lambda (article)
+                       (let ((author (user:get (dm:field article "author"))))
+                         (setf (dm:field article "homepage") (user:field author "homepage")
+                               (dm:field article "email") (user:field author "email"))))
+                   (dm:get 'reader-articles
+                           (if tag
+                               (db:query (:matches 'tags (query-tag tag)))
+                               (db:query :all)) :amount *entry-count* :sort '((time :DESC))))))
+    (with-template-to-cache ((cache-file :atom tag) "atom.ctml")
+      (r-clip:process
+       T
+       :updated (if articles (dm:field (first articles) "time") -1)
+       :articles articles
+       :tag (when tag (urlencode:urlencode tag))
+       :domain (domain *request*)
+       :title (config-tree :reader :title)
+       :description (config-tree :reader :description))
+      (let ((header (make-instance 'plump-dom:xml-header :parent NIL)))
+        (setf (plump-dom:attribute header "version") "1.0"
+              (plump-dom:attribute header "encoding") "utf-8")
+        (lquery:$ (prepend header))))))
+
+(define-trigger (article-updated 'reader-atom) (article)
+  (recache-atom)
+  (dolist (tag (mapcar #'sanitize-tag (cl-ppcre:split "," (dm:field article "tags"))))
+    (recache-tag tag)))
+
+(define-trigger (article-updated 'reader-atom) (article)
+  (recache-atom)
+  (dolist (tag (mapcar #'sanitize-tag (cl-ppcre:split "," (dm:field article "tags"))))
+    (recache-tag tag)))
+
 (define-api reader/atom (&optional tag) ()
   (let ((tag (and tag (sanitize-tag tag))))
-    (prog1
-        (cache-wrapper ("READER-ATOM-~a" tag)
-          (format
-           NIL "<?xml version=\"1.0\" encoding=\"utf-8\"?>~%~a"
-           (lquery-wrapper ("atom.ctml")
-             (let ((articles (mapc
-                              #'(lambda (article)
-                                  (let ((author (user:get (dm:field article "author"))))
-                                    (setf (dm:field article "homepage") (user:field author "homepage")
-                                          (dm:field article "email") (user:field author "email"))))
-                              (dm:get 'reader-articles
-                                      (if tag
-                                          (db:query (:matches 'tags (query-tag tag)))
-                                          (db:query :all)) :amount *entry-count* :sort '((time :DESC))))))
-               (r-clip:process (lquery:$ (node))
-                               :updated (if articles (dm:field (first articles) "time") -1)
-                               :articles articles
-                               :tag (when tag (urlencode:urlencode tag))
-                               :domain (domain *request*)
-                               :title (config-tree :reader :title)
-                               :description (config-tree :reader :description))))))
+    (prog1 (show-cache :atom tag)
       (setf (content-type *response*) "application/atom+xml"))))

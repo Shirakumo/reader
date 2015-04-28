@@ -14,12 +14,14 @@
   :license "Artistic"
   :description "A simple blogging platform for Radiance."
   :homepage "https://github.com/Shinmera/reader"
-  :components ((:file "reader")
+  :components ((:file "module")
+               (:file "db")
+               (:file "cache")
+               (:file "reader")
                (:file "atom"))
   :depends-on ((:interface :database)
                (:interface :data-model)
                (:interface :auth)
-               (:interface :cache)
                (:interface :profile)
                :local-time
                :r-clip

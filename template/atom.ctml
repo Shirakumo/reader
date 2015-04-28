@@ -24,7 +24,7 @@
         <c:when test="homepage"><uri lquery="(text homepage)">http://example.org/</uri></c:when>
         <c:when test="email"><email lquery="(text email)">author@example.com</email></c:when>
       </author>
-      <content type="html" lquery="(text (reader::parse text))">
+      <content type="html" lquery="(text (reader::article-content *))">
         EXCERPT
       </content>
     </entry>

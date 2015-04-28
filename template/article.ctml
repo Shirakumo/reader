@@ -20,7 +20,7 @@
             <h1><a href="#" lquery="(attr :href (reader::article-url _id)) (text title)">TITLE</a></h1>
             <div class="date" lquery="(text (reader::format-time time))">20xx.xx.xx</div>
             <nav id="tags">
-              <ul iterate="tags">
+              <ul iterate="(reader::article-tags *)">
                 <li><a href="#" lquery="(attr :href (reader::tag-url *)) (text *)">TAG</a></li>
               </ul>
             </nav>
@@ -28,7 +28,7 @@
           </div>
         </header>
         <section id="article-body">
-          <div iterate="(reader::series tags _id)">
+          <div iterate="(reader::series (reader::article-tags *) _id)">
             <nav class="series">
               <div class="description">
                 This article is a part of the series <span class="series-title" lquery="(text title)">TITLE</span>.
@@ -46,7 +46,7 @@
               </div>
             </nav>
           </div>
-          <c:noop as="blockquote" lquery="(html (reader::parse text))">
+          <c:noop as="blockquote" lquery="(html (reader::article-content *))">
             TEXT
           </c:noop>
           <div class="notice">
