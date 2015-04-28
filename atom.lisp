@@ -41,12 +41,12 @@
 
 (define-trigger (article-updated 'reader-atom) (article)
   (recache-atom)
-  (dolist (tag (mapcar #'sanitize-tag (cl-ppcre:split "," (dm:field article "tags"))))
+  (dolist (tag (article-tags article))
     (recache-tag tag)))
 
 (define-trigger (article-deleted 'reader-atom) (article)
   (recache-atom)
-  (dolist (tag (mapcar #'sanitize-tag (cl-ppcre:split "," (dm:field article "tags"))))
+  (dolist (tag (article-tags article))
     (recache-tag tag)))
 
 (define-trigger (recache-all 'reader-atom) (articles)
