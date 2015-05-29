@@ -32,8 +32,8 @@ article header #author-avatar{
     border: 3px solid #0088EE;
     background: #000;
     margin: 0 10px 0 -80px;
-    width: 64px;
-    height: 64px;
+    width: 96px;
+    height: 96px;
 }
 
 article header #author-avatar img{
