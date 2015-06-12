@@ -42,12 +42,12 @@
 (define-trigger (article-updated 'reader-atom) (article)
   (recache-atom)
   (dolist (tag (article-tags article))
-    (recache-tag tag)))
+    (recache-atom tag)))
 
 (define-trigger (article-deleted 'reader-atom) (article)
   (recache-atom)
   (dolist (tag (article-tags article))
-    (recache-tag tag)))
+    (recache-atom tag)))
 
 (define-trigger (recache-all 'reader-atom) (articles)
   (let ((tags ()))
