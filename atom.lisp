@@ -32,8 +32,8 @@
        :articles articles
        :tag (when tag (urlencode:urlencode tag))
        :domain (domain *request*)
-       :title (config-tree :reader :title)
-       :description (config-tree :reader :description))
+       :title (config :title)
+       :description (config :description))
       (let ((header (make-instance 'plump-dom:xml-header :parent NIL)))
         (setf (plump-dom:attribute header "version") "1.0"
               (plump-dom:attribute header "encoding") "utf-8")

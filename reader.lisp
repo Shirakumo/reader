@@ -62,8 +62,8 @@
     (r-clip:process (lquery:$ (node))
                     :article article
                     :message message
-                    :title (config-tree :reader :title)
-                    :description (config-tree :reader :description))))
+                    :title (config :title)
+                    :description (config :description))))
 
 (define-page web-fonts (#@"/static/reader/wf/(.+)" 1001) (:uri-groups (path))
   (setf (header "Cache-Control") "public, max-age=31536000")

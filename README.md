@@ -10,7 +10,7 @@ Install
 -------
 0. Make sure the [Shirakumo dist](https://github.com/Shirakumo/dist) is installed and [Radiance](https://github.com/Shinmera/Radiance) is set up.
 1. Load reader: `(ql:quickload :reader)`
-2. Set the title: `(setf (radiance:config-tree :reader :title) "My Fancy Blog")`
+2. Set the title: `(setf (radiance:mconfig :reader :title) "My Fancy Blog")`
 3. Start radiance: `(radiance:startup)`
 4. Visit <http://radiance.test:8080/!/reader/>
 

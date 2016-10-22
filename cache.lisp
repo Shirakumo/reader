@@ -120,8 +120,8 @@
                 :articles page
                 :page (1+ index)
                 :has-more (< index (1- (length pages)))
-                :title (config-tree :reader :title)
-                :description (config-tree :reader :description))))))
+                :title (config :title)
+                :description (config :description))))))
 
 (defun recache-tag (tag)
   (let* ((articles (dm:get 'reader-articles (db:query (:matches 'tags (query-tag tag))) :sort '((time :DESC))))
@@ -135,8 +135,8 @@
                 :articles page
                 :page (1+ index)
                 :has-more (< index (1- (length pages)))
-                :title (config-tree :reader :title)
-                :description (config-tree :reader :description))))))
+                :title (config :title)
+                :description (config :description))))))
 
 (defun recache-article (article &optional recache-content)
   (let* ((article (ensure-article article))
@@ -150,8 +150,8 @@
        :next next
        :prev prev
        :links (dm:get 'reader-links (db:query :all))
-       :title (config-tree :reader :title)
-       :description (config-tree :reader :description)))))
+       :title (config :title)
+       :description (config :description)))))
 
 (defun recache-all ()
   (trigger 'recache-all (dm:get 'reader-articles (db:query :all) :sort '((time :DESC)))))
