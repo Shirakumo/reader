@@ -13,7 +13,7 @@
    NIL (local-time:universal-to-timestamp time)))
 
 (defun atom-url (tag)
-  (external-pattern "/api/reader/atom?tag={0}" tag))
+  (external-uri (format NIL "/api/reader/atom?tag=~a" tag)))
 
 (defun recache-atom (&optional tag)
   (let ((articles (mapc

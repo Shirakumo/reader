@@ -100,10 +100,10 @@
         collect (find-series tag cid)))
 
 (defun article-url (id)
-  (external-pattern "reader/article/{0}" id))
+  (external-uri (format NIL "reader/article/~a" id)))
 
 (defun tag-url (tag)
-  (external-pattern "reader/tagged/{0}" tag))
+  (external-uri (format NIL "reader/tagged/~a" tag)))
 
 (defparameter *time-format* '((:year 4) #\. (:month 2) #\. (:day 2)))
 (defun format-time (time)
