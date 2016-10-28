@@ -22,3 +22,7 @@
 (define-hook article-updated (article))
 (define-hook article-deleted (article))
 (define-hook recache-all (articles))
+
+(define-trigger startup-done ()
+  (defaulted-config "Untitled" :title)
+  (defaulted-config "An unconfigured blog." :description))
