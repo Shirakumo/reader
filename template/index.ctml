@@ -19,20 +19,30 @@
         </div>
       </header>
       <section id="generic-body">
-        <ul iterate="articles" class="article-listing">
-          <li>
-            <article>
-              <header>
-                <h2><a href="#" lquery="(text title) (attr :href (reader::article-url _id))">LINK</a></h2>
-                <div class="date" lquery="(text (reader::format-time time))">20xx.xx.xx</div>
-              </header>
-              <blockquote lquery="(html (reader::article-excerpt *))">
-                TEXT
-              </blockquote>
-              <br style="clear:both;" />
-            </article>
-          </li>
-        </ul>
+        <c:if test="articles">
+          <c:then>
+            <ul iterate="articles" class="article-listing">
+              <li>
+                <article>
+                  <header>
+                    <h2><a href="#" lquery="(text title) (attr :href (reader::article-url _id))">LINK</a></h2>
+                    <div class="date" lquery="(text (reader::format-time time))">20xx.xx.xx</div>
+                  </header>
+                  <blockquote lquery="(html (reader::article-excerpt *))">
+                    TEXT
+                  </blockquote>
+                  <br style="clear:both;" />
+                </article>
+              </li>
+            </ul>
+          </c:then>
+          <c:else>
+            <h2 style="text-align:center;">There are no articles yet.</h2>
+            <p>
+              You should <a @href="reader/write/">write</a> one.
+            </p>
+          </c:else>
+        </c:if>
       </section>
       <footer>
         <nav id="move">
