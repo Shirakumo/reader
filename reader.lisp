@@ -7,6 +7,8 @@
 (in-package #:reader)
 
 (define-page index #@"reader/" ()
+  (unless (probe-file (cache-file :index 0))
+    (recache-index))
   (show-cache :index 0))
 
 (define-page page #@"reader/page/([0-9]*)" (:uri-groups (page))
