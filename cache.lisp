@@ -112,7 +112,7 @@
 (defun recache-index ()
   (let* ((articles (dm:get 'reader-articles (db:query :all) :sort '((time :DESC))))
          (pages (partition articles *app*)))
-    (loop for page in pages
+    (loop for page in (or pages '(()))
           for index from 0
           do (with-template-to-cache ((cache-file :index index) "index.ctml")
                (r-clip:process
