@@ -18,7 +18,7 @@
               <img src="" lquery="(attr :src (profile:avatar author 96))" alt="Avatar" />
             </a>
             <h1><a href="#" lquery="(attr :href (reader::article-url _id)) (text title)">TITLE</a></h1>
-            <div class="date" lquery="(text (reader::format-time time))">20xx.xx.xx</div>
+            <div class="date" lquery="(text (format-human-date time))">20xx.xx.xx</div>
             <nav id="tags">
               <ul iterate="(reader::article-tags *)">
                 <li><a href="#" lquery="(attr :href (reader::tag-url *)) (text *)">TAG</a></li>

@@ -8,10 +8,6 @@
 
 (defvar *entry-count* 10)
 
-(defun atom-time (time)
-  (local-time:format-timestring
-   NIL (local-time:universal-to-timestamp time)))
-
 (defun atom-url (tag)
   (external-uri (format NIL "/api/reader/atom?tag=~a" tag)))
 

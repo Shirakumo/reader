@@ -105,10 +105,6 @@
 (defun tag-url (tag)
   (external-uri (format NIL "reader/tagged/~a" tag)))
 
-(defparameter *time-format* '((:year 4) #\. (:month 2) #\. (:day 2)))
-(defun format-time (time)
-  (local-time:format-timestring NIL (local-time:universal-to-timestamp time) :format *time-format*))
-
 (defun recache-index ()
   (let* ((articles (dm:get 'reader-articles (db:query :all) :sort '((time :DESC))))
          (pages (partition articles *app*)))

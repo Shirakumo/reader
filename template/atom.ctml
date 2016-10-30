@@ -3,7 +3,7 @@
   <subtitle type="html" lquery="(text description)">
     DESCRIPTION
   </subtitle>
-  <updated lquery="(text (reader::atom-time updated))"></updated>
+  <updated lquery="(text (format-machine-date updated))"></updated>
   <id>http://reader.<c:splice lquery="(text domain)" />/</id>
   <link rel="alternate" type="text/html" hreflang="en" @href="reader/" />
   <link rel="self" type="application/atom+xml" @href='(#?"reader/api/reader/atom{0}" (format NIL "~@[?tag=~a~]" tag))'/>
@@ -17,8 +17,8 @@
       <link rel="alternate" type="text/html" href="http://reader.DOMAIN/article/ID"
             lquery="(attr :href (reader::article-url _id))"/>
       <id lquery="(text (reader::article-url _id))">http://reader.DOMAIN/article/ID</id>
-      <published lquery="(text (reader::atom-time time))">TIME</published>
-      <updated lquery="(text (reader::atom-time time))">TIME</updated>
+      <published lquery="(text (format-machine-date time))">TIME</published>
+      <updated lquery="(text (format-machine-date time))">TIME</updated>
       <author>
         <name lquery="(text author)">AUTHOR</name>
         <c:when test="homepage"><uri lquery="(text homepage)">http://example.org/</uri></c:when>
