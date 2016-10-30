@@ -14,7 +14,7 @@
       <c:using value="article">
         <header>
           <div>
-            <a @href='(#?"<profile:user;{0}>" author)' id="author-avatar" lquery="(attr :title author)">
+            <a @href='(#?"<profile:page;{0}>" author)' id="author-avatar" lquery="(attr :title author)">
               <img src="" lquery="(attr :src (profile:avatar author 96))" alt="Avatar" />
             </a>
             <h1><a href="#" lquery="(attr :href (reader::article-url _id)) (text title)">TITLE</a></h1>
@@ -50,7 +50,7 @@
             TEXT
           </c:noop>
           <div class="notice">
-              Written by <a @href='(#?"<profile:user;{0}>" author)' id="author-avatar" lquery="(attr :title author) (text author)">AUTHOR</a>
+              Written by <a @href='(#?"<profile:page;{0}>" author)' id="author-avatar" lquery="(attr :title author) (text author)">AUTHOR</a>
           </div>
         </section>
       </c:using>
