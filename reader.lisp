@@ -29,6 +29,9 @@
          (article (or (dm:get-one 'reader-articles (db:query (:= '_id id))) (dm:hull 'reader-articles)))
          (action (or (post-var "action") "noop"))
          (message))
+    (unless (or (string= (dm:field article "author") (user:username (auth:current)))
+                (user:check (auth:current) (perm reader admin)))
+      (error 'request-denied :message "You do not have the permission to edit this post."))
     (cond
       ((string-equal action "save")
        (let ((tags (mapcar #'sanitize-tag (cl-ppcre:split "," (post-var "tags")))))
