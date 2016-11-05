@@ -67,7 +67,7 @@
     (restart-case
         (progn
           (with-open-file (stream temp :direction :output :if-exists :supersede)
-            (let ((lquery:*lquery-master-document* (lquery:load-page (template template))))
+            (let ((lquery:*lquery-master-document* (lquery:load-page (@template template))))
               (funcall function)
               (lquery:$ (serialize stream))))
           (uiop:rename-file-overwriting-target temp file))
