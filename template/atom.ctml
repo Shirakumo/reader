@@ -6,7 +6,7 @@
   <updated lquery="(text (format-machine-date updated))"></updated>
   <id>http://reader.<c:splice lquery="(text domain)" />/</id>
   <link rel="alternate" type="text/html" hreflang="en" @href="reader/" />
-  <link rel="self" type="application/atom+xml" @href='(#?"reader/api/reader/atom{0}" (format NIL "~@[?tag=~a~]" tag))'/>
+  <link rel="self" type="application/atom+xml" @href='reader/api/reader/atom{0} (format NIL "~@[?tag=~a~]" tag)'/>
   <rights>Copyright (c) 2014, TymoonNET/NexT</rights>
   <generator uri="http://github.com/Shinmera/radiance-reader/" version="1.0">
     radiance-reader
