@@ -7,8 +7,8 @@
     <meta name="description" content="Reader Blog" lquery="(attr :content description)" />
     <meta name="robots" content="index, follow" />
     <link rel="stylesheet" type="text/css" @href="/static/reader/reader.css" />
-    <link href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="TAG Atom Feed"
-          lquery="(attr :href (reader::atom-url tag) :title (format NIL &quot;~a Atom Feed&quot; tag))"/>
+    <link href="/api/reader/atom" @href="/api/reader/atom?tag={0} tag" type="application/atom+xml" rel="alternate" title="TAG Atom Feed"
+          lquery='(attr :title (format NIL "~a Atom Feed" tag))'/>
   </head>
   <body>
     <article>
@@ -23,7 +23,7 @@
           <li>
             <article>
               <header>
-                <h2><a href="#" lquery="(text title) (attr :href (reader::article-url _id))">LINK</a></h2>
+                <h2><a href="#" @href="reader/article/{0} _id" lquery="(text title)">LINK</a></h2>
                 <div class="date" lquery="(text (format-human-date time))">20xx.xx.xx</div>
               </header>
               <blockquote lquery="(html (reader::article-excerpt *))">

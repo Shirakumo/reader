@@ -17,11 +17,11 @@
             <a @href='<profile page {0}> author' id="author-avatar" lquery="(attr :title author)">
               <img src="" lquery="(attr :src (profile:avatar author 96))" alt="Avatar" />
             </a>
-            <h1><a href="#" lquery="(attr :href (reader::article-url _id)) (text title)">TITLE</a></h1>
+            <h1><a href="#" @href="reader/article/{0} _id" lquery="(text title)">TITLE</a></h1>
             <div class="date" lquery="(text (format-human-date time))">20xx.xx.xx</div>
             <nav id="tags">
               <ul iterate="(reader::article-tags *)">
-                <li><a href="#" lquery="(attr :href (reader::tag-url *)) (text *)">TAG</a></li>
+                <li><a href="#" @href="reader/tagged/{0} *" lquery="(text *)">TAG</a></li>
               </ul>
             </nav>
             <a @href="reader/" id="index-link">Index</a>
@@ -35,13 +35,13 @@
               </div>
               <div class="links">
                 <c:when test="first">
-                  <a class="first" href="#" lquery="(attr :href (reader::article-url (clip first '_id))) (text (clip first 'title))">First</a>
+                  <a class="first" href="#" @href="reader/article/{0} (clip first '_id)" lquery="(text (clip first 'title))">First</a>
                 </c:when>
                 <c:when test="prev">
-                  <a class="prev" href="#" lquery="(attr :href (reader::article-url (clip prev '_id))) (text (clip prev 'title))">Previous</a>
+                  <a class="prev" href="#" @href="reader/article/{0} (clip prev '_id)" lquery="(text (clip prev 'title))">Previous</a>
                 </c:when>
                 <c:when test="next">
-                  <a class="next" href="#" lquery="(attr :href (reader::article-url (clip next '_id))) (text (clip next 'title))">Next</a>
+                  <a class="next" href="#" @href="reader/article/{0} (clip next '_id)" lquery="(text (clip next 'title))">Next</a>
                 </c:when>
               </div>
             </nav>
@@ -57,10 +57,10 @@
       <footer>
         <nav id="move">
           <c:when test="prev">
-            <a class="prev" href="#" lquery="(attr :href (reader::article-url (clip prev '_id))) (text (clip prev 'title))">Previous</a>
+            <a class="prev" href="#" @href="reader/article/{0} (clip prev '_id)" lquery="(text (clip prev 'title))">Previous</a>
           </c:when>
           <c:when test="next">
-            <a class="next" href="#" lquery="(attr :href (reader::article-url (clip next '_id))) (text (clip next 'title))">Next</a>
+            <a class="next" href="#" @href="reader/article/{0} (clip next '_id)" lquery="(text (clip next 'title))">Next</a>
           </c:when>
         </nav>
         <nav id="default-linkage">

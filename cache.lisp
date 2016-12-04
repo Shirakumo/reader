@@ -6,7 +6,7 @@
 
 (in-package #:reader)
 
-(defvar *cache* (asdf:system-relative-pathname :reader "cache/"))
+(defvar *cache* (merge-pathnames "cache/" (mconfig-pathname #.*package*)))
 (defvar *article-contents* (make-hash-table :test 'eql))
 (defparameter *app* 25)
 
@@ -99,12 +99,6 @@
         when (starts-with tag "s:")
         collect (find-series tag cid)))
 
-(defun article-url (id)
-  (external-uri (format NIL "reader/article/~a" id)))
-
-(defun tag-url (tag)
-  (external-uri (format NIL "reader/tagged/~a" tag)))
-
 (defun recache-index ()
   (let* ((articles (dm:get 'reader-articles (db:query :all) :sort '((time :DESC))))
          (pages (partition articles *app*)))
@@ -117,7 +111,8 @@
                 :page (1+ index)
                 :has-more (< index (1- (length pages)))
                 :title (config :title)
-                :description (config :description))))))
+                :description (config :description))))
+    articles))
 
 (defun recache-tag (tag)
   (let* ((articles (dm:get 'reader-articles (db:query (:matches 'tags (query-tag tag))) :sort '((time :DESC))))
@@ -132,7 +127,8 @@
                 :page (1+ index)
                 :has-more (< index (1- (length pages)))
                 :title (config :title)
-                :description (config :description))))))
+                :description (config :description))))
+    articles))
 
 (defun recache-article (article &optional recache-content)
   (let* ((article (ensure-article article))
@@ -147,7 +143,8 @@
        :prev prev
        :links (dm:get 'reader-links (db:query :all))
        :title (config :title)
-       :description (config :description)))))
+       :description (config :description)))
+    article))
 
 (defun recache-all ()
   (trigger 'recache-all (dm:get 'reader-articles (db:query :all) :sort '((time :DESC)))))
@@ -176,7 +173,9 @@
   (recache-article article T)
   (recache-index)
   (dolist (tag (article-tags article))
-    (recache-tag tag)))
+    ;; Recache tagged pages to refresh the prev/next links.
+    (dolist (article (recache-tag tag))
+      (recache-article article))))
 
 (define-trigger (article-deleted 'reader-cache) (article)
   (uiop:delete-file-if-exists (cache-file :article (dm:id article)))

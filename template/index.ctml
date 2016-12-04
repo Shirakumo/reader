@@ -25,7 +25,7 @@
               <li>
                 <article>
                   <header>
-                    <h2><a href="#" lquery="(text title) (attr :href (reader::article-url _id))">LINK</a></h2>
+                    <h2><a href="#" @href="reader/article/{0} _id" lquery="(text title)">LINK</a></h2>
                     <div class="date" lquery="(text (format-human-date time))">20xx.xx.xx</div>
                   </header>
                   <blockquote lquery="(html (reader::article-excerpt *))">

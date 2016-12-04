@@ -8,9 +8,6 @@
 
 (defvar *entry-count* 10)
 
-(defun atom-url (tag)
-  (external-uri (format NIL "/api/reader/atom?tag=~a" tag)))
-
 (defun recache-atom (&optional tag)
   (let ((articles (mapc
                    #'(lambda (article)

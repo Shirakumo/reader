@@ -29,7 +29,8 @@
          (article (or (dm:get-one 'reader-articles (db:query (:= '_id id))) (dm:hull 'reader-articles)))
          (action (or (post-var "action") "noop"))
          (message))
-    (unless (or (string= (dm:field article "author") (user:username (auth:current)))
+    (unless (or (= id -1)
+                (string= (dm:field article "author") (user:username (auth:current)))
                 (user:check (auth:current) (perm reader admin)))
       (error 'request-denied :message "You do not have the permission to edit this post."))
     (cond
@@ -43,10 +44,12 @@
             (setf (dm:field article "time") (get-universal-time)
                   (dm:field article "author") (user:username (auth:current)))
             (dm:insert article)
-            (setf message (format NIL "Article <a href=\"~a\">created</a>!" (article-url (dm:id article)))))
+            (setf message (format NIL "Article <a href=\"~a\">created</a>!"
+                                  (uri-to-url (format NIL "reader/article/~a" (dm:id article)) :representation :external))))
            (t
             (dm:save article)
-            (setf message (format NIL "Article <a href=\"~a\">updated</a>!" (article-url (dm:id article))))))
+            (setf message (format NIL "Article <a href=\"~a\">updated</a>!"
+                                  (uri-to-url (format NIL "reader/article/~a" (dm:id article)) :representation :external)))))
          ;; Recache necessary parts
          (trigger 'article-updated article)))
       
