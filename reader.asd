@@ -20,9 +20,9 @@
                (:file "reader")
                (:file "atom"))
   :depends-on ((:interface :database)
-               (:interface :data-model)
                (:interface :auth)
                (:interface :profile)
+               :r-data-model
                :local-time
                :r-clip
                :3bmd
