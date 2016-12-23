@@ -10,14 +10,12 @@
   (db:create 'reader-articles '((title (:varchar 64)) (text :text) (author (:varchar 32)) (time (:integer 5)) (tags :text)))
   (db:create 'reader-links '((title (:varchar 32)) (url (:varchar 128)))))
 
-(defgeneric ensure-article (article)
-  (:method ((id integer))
-    (or (dm:get-one 'reader-articles (db:query (:= '_id id)))
-        (error "No post with ID ~d found." id)))
-  (:method ((id string))
-    (ensure-article (parse-integer id)))
-  (:method ((article dm:data-model))
-    article))
+(defun ensure-article (article)
+  (typecase article
+    (dm:data-model article)
+    (db:id (or (dm:get-one 'reader-articles (db:query (:= '_id article)))
+               (error "No post with ID ~d found." article)))
+    (T (ensure-article (db:ensure-id article)))))
 
 (define-hook article-updated (article))
 (define-hook article-deleted (article))
