@@ -67,9 +67,9 @@
     (restart-case
         (progn
           (with-open-file (stream temp :direction :output :if-exists :supersede)
-            (let ((lquery:*lquery-master-document* (lquery:load-page (@template template))))
+            (let ((r-clip:*document* (plump:parse (@template template))))
               (funcall function)
-              (lquery:$ (serialize stream))))
+              (plump:serialize r-clip:*document* stream)))
           (uiop:rename-file-overwriting-target temp file))
       (stub ()
         :report "Create a stub file instead."

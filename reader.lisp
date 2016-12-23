@@ -24,7 +24,7 @@
         (page (1- (or (parse-integer (or page "") :junk-allowed T) 1))))
     (show-cache :tag tag page)))
 
-(define-page write "reader/write/([0-9]*)" (:uri-groups (id) :clip (@template "write.ctml") :access (perm reader write))
+(define-page write "reader/write/([0-9]*)" (:uri-groups (id) :clip "write.ctml" :access (perm reader write))
   (let* ((id (or (parse-integer (or (post/get "id") id) :junk-allowed T) -1))
          (article (or (dm:get-one 'reader-articles (db:query (:= '_id id))) (dm:hull 'reader-articles)))
          (action (or (post-var "action") "noop"))
@@ -64,10 +64,7 @@
       ((string-equal action "noop"))
       
       (T (error 'radiance-error :message (format NIL "Unknown action ~a." action))))
-    (if message
-        (lquery:$ "#message" (html message))
-        (lquery:$ "#message" (remove)))
-    (r-clip:process (lquery:$ (node))
+    (r-clip:process T
                     :article article
                     :message message
                     :title (config :title)

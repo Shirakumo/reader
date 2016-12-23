@@ -10,10 +10,10 @@
 
 (defun recache-atom (&optional tag)
   (let ((articles (mapc
-                   #'(lambda (article)
-                       (let ((author (user:get (dm:field article "author"))))
-                         (setf (dm:field article "homepage") (user:field "homepage" author)
-                               (dm:field article "email") (user:field "email" author))))
+                   (lambda (article)
+                     (let ((author (user:get (dm:field article "author"))))
+                       (setf (dm:field article "homepage") (user:field "homepage" author)
+                             (dm:field article "email") (user:field "email" author))))
                    (dm:get 'reader-articles
                            (if tag
                                (db:query (:matches 'tags (query-tag tag)))
@@ -24,13 +24,9 @@
        :updated (if articles (dm:field (first articles) "time") -1)
        :articles articles
        :tag (when tag (urlencode:urlencode tag))
-       :domain (domain *request*)
+       :domain (if (boundp '*request*) (domain *request*) (first (mconfig :radiance-core :domains)))
        :title (config :title)
-       :description (config :description))
-      (let ((header (make-instance 'plump-dom:xml-header :parent NIL)))
-        (setf (plump-dom:attribute header "version") "1.0"
-              (plump-dom:attribute header "encoding") "utf-8")
-        (lquery:$ (prepend header))))))
+       :description (config :description)))))
 
 (define-trigger (article-updated 'reader-atom) (article)
   (recache-atom)

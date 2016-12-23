@@ -25,7 +25,9 @@
             </div>
           </header>
           <section id="writer-body">
-            <div id="message" />
+            <c:when test="(** :message)">
+              <div id="message" lquery="(html (** :message))" />
+            </c:when>
             <textarea name="text" lquery="(text text)" required="required" tabindex="3"></textarea>
             <nav id="buttons">
               <input class="save" type="submit" name="action" value="Save" tabindex="4" />
