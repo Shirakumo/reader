@@ -47,10 +47,11 @@
 (defun show-cache (type thing &optional page)
   (let ((file (cache-file type thing page)))
     (unless (probe-file file)
-      (ecase type
+      (case type
         (:index (recache-index))
         (:article (recache-article thing))
-        (:tag (recache-tag thing))))
+        (:tag (recache-tag thing))
+        (:atom (recache-atom tag))))
     (serve-file file "application/xhtml+xml; charset=utf-8"))
   NIL)
 
