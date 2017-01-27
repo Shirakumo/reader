@@ -51,7 +51,7 @@
         (:index (recache-index))
         (:article (recache-article thing))
         (:tag (recache-tag thing))
-        (:atom (recache-atom tag))))
+        (:atom (recache-atom thing))))
     (serve-file file "application/xhtml+xml; charset=utf-8"))
   NIL)
 
