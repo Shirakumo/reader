@@ -173,8 +173,7 @@
                (format T "~&..~d~%" i))
              (recache-tag tag))
     (format T "~&Recaching index~%")
-    (recache-index)
-    (trigger 'recache-all articles)))
+    (recache-index)))
 
 (define-trigger (article-updated 'reader-cache) (article)
   (recache-article article T)
