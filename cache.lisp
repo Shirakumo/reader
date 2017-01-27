@@ -45,7 +45,13 @@
    *cache*))
 
 (defun show-cache (type thing &optional page)
-  (serve-file (cache-file type thing page) "application/xhtml+xml; charset=utf-8")
+  (let ((file (cache-file type thing page)))
+    (unless (probe-file file)
+      (ecase type
+        (:index (recache-index))
+        (:article (recache-article thing))
+        (:tag (recache-tag thing))))
+    (serve-file file "application/xhtml+xml; charset=utf-8"))
   NIL)
 
 (defun partition (set n)
