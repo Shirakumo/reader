@@ -32,8 +32,8 @@ Interface Dependencies
 
 Configuration Variables
 -----------------------
-* `(:reader :title)`
-* `(:reader :description)`
+* `(:title)`
+* `(:description)`
 
 Permissions
 -----------
