@@ -14,7 +14,7 @@
                      (let ((author (user:get (dm:field article "author"))))
                        (setf (dm:field article "homepage") (user:field "homepage" author)
                              (dm:field article "email") (user:field "email" author))))
-                   (dm:get 'reader-articles
+                   (dm:get 'articles
                            (if tag
                                (db:query (:matches 'tags (query-tag tag)))
                                (db:query :all)) :amount *entry-count* :sort '((time :DESC))))))
