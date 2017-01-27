@@ -7,13 +7,13 @@
 (in-package #:reader)
 
 (define-trigger db:connected ()
-  (db:create 'reader-articles '((title (:varchar 64)) (text :text) (author (:varchar 32)) (time (:integer 5)) (tags :text)))
-  (db:create 'reader-links '((title (:varchar 32)) (url (:varchar 128)))))
+  (db:create 'articles '((title (:varchar 64)) (text :text) (author (:varchar 32)) (time (:integer 5)) (tags :text)))
+  (db:create 'links '((title (:varchar 32)) (url (:varchar 128)))))
 
 (defun ensure-article (article)
   (typecase article
     (dm:data-model article)
-    (db:id (or (dm:get-one 'reader-articles (db:query (:= '_id article)))
+    (db:id (or (dm:get-one 'articles (db:query (:= '_id article)))
                (error "No post with ID ~d found." article)))
     (T (ensure-article (db:ensure-id article)))))
 

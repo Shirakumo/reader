@@ -86,9 +86,9 @@
        (string-equal subs string :end2 (length subs))))
 
 (defun find-series (tag cid)
-  (let ((first (dm:get-one 'reader-articles (db:query (:matches 'tags (query-tag tag))) :sort '(("_id" :ASC))))
-        (next (dm:get-one 'reader-articles (db:query (:and (:matches 'tags (query-tag tag)) (:> '_id cid))) :sort '(("_id" :ASC))))
-        (prev (dm:get-one 'reader-articles (db:query (:and (:matches 'tags (query-tag tag)) (:< '_id cid))) :sort '(("_id" :DESC)))))
+  (let ((first (dm:get-one 'articles (db:query (:matches 'tags (query-tag tag))) :sort '(("_id" :ASC))))
+        (next (dm:get-one 'articles (db:query (:and (:matches 'tags (query-tag tag)) (:> '_id cid))) :sort '(("_id" :ASC))))
+        (prev (dm:get-one 'articles (db:query (:and (:matches 'tags (query-tag tag)) (:< '_id cid))) :sort '(("_id" :DESC)))))
     (list :title (subseq tag 2)
           :first first
           :next next
@@ -100,7 +100,7 @@
         collect (find-series tag cid)))
 
 (defun recache-index ()
-  (let* ((articles (dm:get 'reader-articles (db:query :all) :sort '((time :DESC))))
+  (let* ((articles (dm:get 'articles (db:query :all) :sort '((time :DESC))))
          (pages (partition articles *app*)))
     (loop for page in (or pages '(()))
           for index from 0
@@ -115,7 +115,7 @@
     articles))
 
 (defun recache-tag (tag)
-  (let* ((articles (dm:get 'reader-articles (db:query (:matches 'tags (query-tag tag))) :sort '((time :DESC))))
+  (let* ((articles (dm:get 'articles (db:query (:matches 'tags (query-tag tag))) :sort '((time :DESC))))
          (pages (partition articles *app*)))
     (loop for page in pages
           for index from 0
@@ -132,8 +132,8 @@
 
 (defun recache-article (article &optional recache-content)
   (let* ((article (ensure-article article))
-         (next (dm:get-one 'reader-articles (db:query (:> '_id (dm:id article))) :sort '(("_id" :ASC))))
-         (prev (dm:get-one 'reader-articles (db:query (:< '_id (dm:id article))) :sort '(("_id" :DESC)))))
+         (next (dm:get-one 'articles (db:query (:> '_id (dm:id article))) :sort '(("_id" :ASC))))
+         (prev (dm:get-one 'articles (db:query (:< '_id (dm:id article))) :sort '(("_id" :DESC)))))
     (when recache-content (setf (gethash (dm:id article) *article-contents*) NIL))
     (with-template-to-cache ((cache-file :article (dm:id article)) "article.ctml")
       (r-clip:process
@@ -141,13 +141,13 @@
        :article article
        :next next
        :prev prev
-       :links (dm:get 'reader-links (db:query :all))
+       :links (dm:get 'links (db:query :all))
        :title (config :title)
        :description (config :description)))
     article))
 
 (defun recache-all ()
-  (trigger 'recache-all (dm:get 'reader-articles (db:query :all) :sort '((time :DESC)))))
+  (trigger 'recache-all (dm:get 'articles (db:query :all) :sort '((time :DESC)))))
 
 (define-trigger (recache-all 'reader-cache) (articles)
   (let ((tags ()))
