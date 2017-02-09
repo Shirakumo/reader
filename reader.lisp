@@ -26,7 +26,7 @@
 
 (define-page write "reader/write/([0-9]*)" (:uri-groups (id) :clip "write.ctml" :access (perm reader write))
   (let* ((id (or (parse-integer (or (post/get "id") id) :junk-allowed T) -1))
-         (article (or (dm:get-one 'reader-articles (db:query (:= '_id id))) (dm:hull 'reader-articles)))
+         (article (or (dm:get-one 'articles (db:query (:= '_id id))) (dm:hull 'articles)))
          (action (or (post-var "action") "noop"))
          (message))
     (unless (or (= id -1)
@@ -58,7 +58,7 @@
          (error 'radiance-error :message (format NIL "No such article to delete.")))
        (dm:delete article)
        (trigger 'article-deleted article)
-       (setf article (dm:hull 'reader-articles))
+       (setf article (dm:hull 'articles))
        (setf message "Article deleted."))
       
       ((string-equal action "noop"))
