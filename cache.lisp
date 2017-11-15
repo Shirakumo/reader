@@ -26,7 +26,7 @@
 (defun article-excerpt (article)
   (let* ((article (ensure-article article))
          (lquery:*lquery-master-document* (article-content article)))
-    (format NIL "~{~a~}" (coerce (lquery:$ "p:first-only" (serialize NIL :xml)) 'list))))
+    (lquery:$ "p" (node))))
 
 (defun sanitize-tag (tag)
   (string-trim " " (cl-ppcre:regex-replace-all "[\\[\\]\\(\\)\\{\\}\\$\\^\\\\\\|\\*,/]" tag "")))
