@@ -26,7 +26,17 @@
 (defun article-excerpt (article)
   (let* ((article (ensure-article article))
          (lquery:*lquery-master-document* (article-content article)))
-    (lquery:$ "p" (node))))
+    (lquery:$1 "p")))
+
+(defun article-image (article)
+  (let* ((article (ensure-article article))
+         (lquery:*lquery-master-document* (article-content article)))
+    (lquery:$1 "img" (attr :src))))
+
+(defun article-description (article)
+  (let* ((article (ensure-article article))
+         (lquery:*lquery-master-document* (article-content article)))
+    (lquery:$1 "p" (text))))
 
 (defun sanitize-tag (tag)
   (string-trim " " (cl-ppcre:regex-replace-all "[\\[\\]\\(\\)\\{\\}\\$\\^\\\\\\|\\*,/]" tag "")))

@@ -8,6 +8,17 @@
     <meta name="robots" content="index, follow" />
     <link rel="stylesheet" type="text/css" @href="/static/reader/reader.css" />
     <link @href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="Reader Atom Feed" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" lquery="(attr :content (clip article 'title))" />
+    <meta name="twitter:description" lquery='(attr :content (reader::article-description article))' />
+    <meta name="twitter:image" lquery='(attr :content (reader::article-image article))' />
+    <meta name="twitter:image:alt" content="Header" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" lquery="(attr :content (clip article 'title))" />
+    <meta property="og:description" lquery='(attr :content (reader::article-description article))' />
+    <meta property="og:image" lquery='(attr :content (reader::article-image article))' />
   </head>
   <body>
     <article>
