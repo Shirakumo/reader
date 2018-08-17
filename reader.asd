@@ -13,7 +13,9 @@
   :version "1.1.2"
   :license "Artistic"
   :description "A simple blogging platform for Radiance."
-  :homepage "https://github.com/Shinmera/reader"
+  :homepage "https://Shinmera.github.io/reader/"
+  :bug-tracker "https://github.com/Shinmera/reader/issues"
+  :source-control (:git "https://github.com/Shinmera/reader.git")
   :serial T
   :components ((:file "module")
                (:file "db")
