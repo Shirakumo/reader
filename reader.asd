@@ -10,7 +10,7 @@
   :class "radiance:virtual-module"
   :author "Nicolas Hafner <shinmera@tymoon.eu>"
   :maintainer "Nicolas Hafner <shinmera@tymoon.eu>"
-  :version "1.1.2"
+  :version "1.2.0"
   :license "Artistic"
   :description "A simple blogging platform for Radiance."
   :homepage "https://Shinmera.github.io/reader/"
