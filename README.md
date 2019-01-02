@@ -34,6 +34,7 @@ Configuration Variables
 -----------------------
 * `(:title)`
 * `(:description)`
+* `(:markup)` The blog markup to use -- either `:markdown`, `:markless`, `:html`, or `:plain`. Defaults to `:markdown`.
 
 Permissions
 -----------

@@ -11,11 +11,24 @@
 (defparameter *app* 25)
 
 (defun parse (text)
-  (let ((3bmd:*smart-quotes* T)
-        (3bmd-code-blocks:*code-blocks* T))
-    (plump:parse
-     (with-output-to-string (string)
-       (3bmd:parse-string-and-print-to-stream text string)))))
+  (ecase (config :markup)
+    (:plain
+     (let ((root (plump:make-root)))
+       (plump:make-text-node root text)
+       root))
+    (:html
+     (plump:parse text))
+    (:markdown
+     (let ((3bmd:*smart-quotes* T)
+           (3bmd-code-blocks:*code-blocks* T))
+       (plump:parse
+        (with-output-to-string (string)
+          (3bmd:parse-string-and-print-to-stream text string)))))
+    (:markless
+     (cl-markless:output
+      text
+      :target (plump-dom:make-root)
+      :format 'cl-markless-plump:plump))))
 
 (defun article-content (article)
   (let ((article (ensure-article article)))

@@ -23,4 +23,5 @@
 
 (define-trigger startup-done ()
   (defaulted-config "Untitled" :title)
-  (defaulted-config "An unconfigured blog." :description))
+  (defaulted-config "An unconfigured blog." :description)
+  (defaulted-config :markdown :markup))
