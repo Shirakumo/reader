@@ -16,6 +16,7 @@
         <div>
           <h1>Posts Tagged <span lquery="(text tag)">TAG</span></h1>
           <a @href="reader/" id="index-link">Index</a>
+          <a @href="/api/reader/atom?tag={0} tag" id="rss-link" title="RSS/Atom feed for the blog entries of this tag.">RSS</a>
         </div>
       </header>
       <section id="generic-body">

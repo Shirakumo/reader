@@ -126,6 +126,20 @@ article header #index-link{
     padding: 5px 5px 5px 85px;
 }
 
+article header #rss-link{
+    background: #0088EE;
+    color: #FFF;
+    padding: 0.1em;
+    text-decoration: none;
+    display: inline-block;
+    float: right;
+    font-size: 1.2em;
+}
+
+article header #rss-link:hover{
+    background: #0099FF;
+}
+
 /* Font stuff */
 #article-body,#writer-body,#writer-body textarea,#generic-body{
     text-align: justify;

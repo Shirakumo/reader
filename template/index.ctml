@@ -24,6 +24,7 @@
           <h1 lquery="(text title)">Reader</h1>
           <span id="" lquery="(text description)">Description</span>
           <a @href="reader/" id="index-link">Index</a>
+          <a @href="/api/reader/atom" id="rss-link" title="RSS/Atom feed for the blog entries.">RSS</a>
         </div>
       </header>
       <section id="generic-body">
