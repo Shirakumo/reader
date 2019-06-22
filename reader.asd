@@ -11,7 +11,7 @@
   :author "Nicolas Hafner <shinmera@tymoon.eu>"
   :maintainer "Nicolas Hafner <shinmera@tymoon.eu>"
   :version "1.2.0"
-  :license "Artistic"
+  :license "zlib"
   :description "A simple blogging platform for Radiance."
   :homepage "https://Shinmera.github.io/reader/"
   :bug-tracker "https://github.com/Shinmera/reader/issues"
