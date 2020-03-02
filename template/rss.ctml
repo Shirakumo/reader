@@ -14,9 +14,12 @@
       <item>
         <title lquery="(text title)">TITLE</title>
         <link lquery='(text (resolve-uri "reader/article/{0}" _id))'/>
-        <guid lquery="(text _id)">ID</guid>
+        <guid isPermaLink="false" lquery="(text _id)">ID</guid>
         <pubDate lquery="(text (reader::format-rfc822 time))">TIME</pubDate>
-        <author lquery="(text author)">AUTHOR</author>
+        <author lquery="(text author)">
+          <c:when test="email"><c:splice lquery="(text email)">author@example.com</c:splice></c:when>
+          AUTHOR
+        </author>
         <description lquery="(text (reader::article-excerpt *))">
           EXCERPT
         </description>
