@@ -6,7 +6,7 @@
 
 (in-package #:reader)
 
-(defvar *cache* (merge-pathnames "cache/" (mconfig-pathname #.*package*)))
+(defvar *cache* (radiance:environment-module-directory #.*package* :cache))
 (defvar *article-contents* (make-hash-table :test 'eql))
 (defparameter *app* 25)
 
