@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+  <channel>
+    <title lquery="(text title)">TITLE</title>
+    <description lquery="(text description)">
+      DESCRIPTION
+    </description>
+    <lastBuildDate lquery="(text (reader::format-rfc822 updated))">DATE</lastBuildDate>
+    <link lquery='(text (resolve-uri "reader/"))'>LINK</link>
+    <generator>
+      radiance-reader
+    </generator>
+    <c:splice iterate="articles">
+      <item>
+        <title lquery="(text title)">TITLE</title>
+        <link lquery='(text (resolve-uri "reader/article/{0}" _id))'/>
+        <guid lquery="(text _id)">ID</guid>
+        <pubDate lquery="(text (reader::format-rfc822 time))">TIME</pubDate>
+        <author lquery="(text author)">AUTHOR</author>
+        <description lquery="(text (reader::article-excerpt *))">
+          EXCERPT
+        </description>
+        <content:encoded lquery="(text (reader::article-content *))">
+          CONTENT
+        </content:encoded>
+      </item>
+    </c:splice>
+  </channel>
+</rss>

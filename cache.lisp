@@ -51,6 +51,12 @@
          (lquery:*lquery-master-document* (article-content article)))
     (lquery:$1 "p" (text))))
 
+(defun format-rfc822 (stamp)
+  (when (integerp stamp) (setf stamp (local-time:universal-to-timestamp stamp)))
+  (local-time:format-timestring
+   NIL stamp :format '(:short-weekday ", " (:day 2) " " :short-month " " (:year 4) " " (:hour 2) ":" (:min 2) ":" (:sec 2) " UT")
+   :timezone local-time:+utc-zone+))
+
 (defun sanitize-tag (tag)
   (string-trim " " (cl-ppcre:regex-replace-all "[\\[\\]\\(\\)\\{\\}\\$\\^\\\\\\|\\*,/]" tag "")))
 
@@ -74,7 +80,8 @@
         (:index (recache-index))
         (:article (recache-article thing))
         (:tag (recache-tag thing))
-        (:atom (recache-atom thing))))
+        (:atom (recache-atom thing))
+        (:rss (recache-atom thing))))
     (serve-file file "application/xhtml+xml; charset=utf-8"))
   NIL)
 

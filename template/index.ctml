@@ -8,6 +8,7 @@
     <meta name="robots" content="index, follow" />
     <link rel="stylesheet" type="text/css" @href="/static/reader/reader.css" />
     <link @href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="Reader Atom Feed" />
+    <link @href="/api/reader/rss" type="application/rss+xml" rel="alternate" title="Reader RSS Feed" />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" lquery="(attr :content title)" />

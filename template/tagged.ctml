@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" @href="/static/reader/reader.css" />
     <link href="/api/reader/atom" @href="/api/reader/atom?tag={0} tag" type="application/atom+xml" rel="alternate" title="TAG Atom Feed"
           lquery='(attr :title (format NIL "~a Atom Feed" tag))'/>
+    <link href="/api/reader/rss" @href="/api/reader/rss?tag={0} tag" type="application/rss+xml" rel="alternate" title="TAG RSS Feed"
+          lquery='(attr :title (format NIL "~a RSS Feed" tag))'/>
   </head>
   <body>
     <article>

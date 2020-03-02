@@ -8,6 +8,7 @@
     <meta name="robots" content="index, follow" />
     <link rel="stylesheet" type="text/css" @href="/static/reader/reader.css" />
     <link @href="/api/reader/atom" type="application/atom+xml" rel="alternate" title="Reader Atom Feed" />
+    <link @href="/api/reader/rss" type="application/rss+xml" rel="alternate" title="Reader RSS Feed" />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" lquery="(attr :content (clip article 'title))" />
@@ -61,7 +62,7 @@
             TEXT
           </c:noop>
           <div class="notice">
-              Written by <a @href='<profile page {0}> author' id="author-avatar" lquery="(attr :title author) (text author)">AUTHOR</a>
+            Written by <a @href='<profile page {0}> author' id="author-avatar" lquery="(attr :title author) (text author)">AUTHOR</a>
           </div>
         </section>
       </c:using>
