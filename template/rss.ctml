@@ -6,7 +6,7 @@
       DESCRIPTION
     </description>
     <lastBuildDate lquery="(text (reader::format-rfc822 updated))">DATE</lastBuildDate>
-    <link lquery='(text (resolve-uri "reader/"))'>LINK</link>
+    <link lquery='(text (resolve-uri "reader/"))'/>
     <generator>
       radiance-reader
     </generator>
