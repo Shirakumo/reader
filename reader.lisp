@@ -38,7 +38,8 @@
        (let ((tags (mapcar #'sanitize-tag (cl-ppcre:split "," (post-var "tags")))))
          (setf (dm:field article "text") (post-var "text")
                (dm:field article "title") (post-var "title")
-               (dm:field article "tags") (format NIL "~{~a~^, ~}" tags))
+               (dm:field article "tags") (format NIL "~{~a~^, ~}" tags)
+               (dm:field article "format") (parse-integer (or (post-var "format") "3")))
          (cond
            ((dm:hull-p article)
             (setf (dm:field article "time") (get-universal-time)
@@ -64,6 +65,12 @@
       ((string-equal action "noop"))
       
       (T (error 'radiance-error :message (format NIL "Unknown action ~a." action))))
+    (unless (dm:field article "format")
+      (setf (dm:field article "format") (ecase (config :markup)
+                                          (:plain 0)
+                                          (:html 1)
+                                          (:markdown 2)
+                                          (:markless 3))))
     (r-clip:process T
                     :article article
                     :message message

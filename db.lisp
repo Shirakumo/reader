@@ -7,7 +7,7 @@
 (in-package #:reader)
 
 (define-trigger db:connected ()
-  (db:create 'articles '((title (:varchar 64)) (text :text) (author (:varchar 32)) (time (:integer 5)) (tags :text)))
+  (db:create 'articles '((title (:varchar 64)) (text :text) (author (:varchar 32)) (time (:integer 5)) (tags :text) (format (:integer 1))))
   (db:create 'links '((title (:varchar 32)) (url (:varchar 128)))))
 
 (defun ensure-article (article)

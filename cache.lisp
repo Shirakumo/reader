@@ -10,21 +10,21 @@
 (defvar *article-contents* (make-hash-table :test 'eql))
 (defparameter *app* 25)
 
-(defun parse (text)
-  (ecase (config :markup)
-    (:plain
+(defun parse (text &optional (markup (config :markup)))
+  (ecase markup
+    ((:plain 0)
      (let ((root (plump:make-root)))
        (plump:make-text-node root text)
        root))
-    (:html
+    ((:html 1)
      (plump:parse text))
-    (:markdown
+    ((:markdown 2)
      (let ((3bmd:*smart-quotes* T)
            (3bmd-code-blocks:*code-blocks* T))
        (plump:parse
         (with-output-to-string (string)
           (3bmd:parse-string-and-print-to-stream text string)))))
-    (:markless
+    ((:markless 3)
      (cl-markless:output
       text
       :target (plump-dom:make-root)
@@ -34,7 +34,8 @@
   (let ((article (ensure-article article)))
     (or (gethash (dm:id article) *article-contents*)
         (setf (gethash (dm:id article) *article-contents*)
-              (parse (dm:field article "text"))))))
+              (parse (dm:field article "text")
+                     (or (dm:field article "format") :markdown))))))
 
 (defun article-excerpt (article)
   (let* ((article (ensure-article article))
