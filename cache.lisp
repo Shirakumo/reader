@@ -39,8 +39,13 @@
 
 (defun article-excerpt (article)
   (let* ((article (ensure-article article))
-         (lquery:*lquery-master-document* (article-content article)))
-    (lquery:$1 "p")))
+         (lquery:*lquery-master-document* (article-content article))
+         (p (lquery:$1 "p")))
+    (unless (lquery:$1 (inline p) "img")
+      (let ((img (lquery:$1 "img")))
+        (when img
+          (lquery:$ (inline p) (prepend img)))))
+    p))
 
 (defun article-image (article)
   (let* ((article (ensure-article article))
