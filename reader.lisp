@@ -36,7 +36,7 @@
     (cond
       ((string-equal action "save")
        (let ((tags (mapcar #'sanitize-tag (cl-ppcre:split "," (post-var "tags")))))
-         (setf (dm:field article "text") (post-var "text")
+         (setf (dm:field article "text") (cl-ppcre:regex-replace-all "\\r\\n" (post-var "text") (string #\Linefeed))
                (dm:field article "title") (post-var "title")
                (dm:field article "tags") (format NIL "~{~a~^, ~}" tags)
                (dm:field article "format") (parse-integer (or (post-var "format") "3")))
