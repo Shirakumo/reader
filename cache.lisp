@@ -10,6 +10,43 @@
 (defvar *article-contents* (make-hash-table :test 'eql))
 (defparameter *app* 25)
 
+(defun youtube-code (url)
+  (let ((pieces (nth-value 1 (cl-ppcre:scan-to-strings "((http|https)://)?(www\\.)?(youtube\\.com|youtu\\.be)/(watch\\?v=)?([0-9a-zA-Z_\\-]{4,12})" url))))
+    (when pieces (aref pieces 5))))
+
+(defclass youtube (cl-markless-components:video)
+  ())
+
+(defmethod cl-markless:output-component ((component youtube) (target plump-dom:nesting-node) (format cl-markless-plump:plump))
+  (let ((element (plump-dom:make-element target "iframe")))
+    (setf (plump-dom:attribute element "width") "100%")
+    (setf (plump-dom:attribute element "height") "240")
+    (setf (plump-dom:attribute element "frameborder") "no")
+    (setf (plump-dom:attribute element "allowfullscreen") "yes")
+    (setf (plump-dom:attribute element "src")
+          (format NIL "//www.youtube.com/embed/~a?" (youtube-code (cl-markless-components:target component))))
+    (loop for option in (cl-markless-components:options component)
+          do (typecase option
+               (cl-markless-components:autoplay-option
+                (setf (plump-dom:attribute element "src")
+                      (format NIL "~aautoplay=1&" (plump-dom:attribute element "src"))))
+               (cl-markless-components:loop-option
+                (setf (plump-dom:attribute element "src")
+                      (format NIL "~aloop=1&" (plump-dom:attribute element "src"))))
+               (cl-markless-components:width-option
+                (setf (plump-dom:attribute element "width")
+                      (format NIL "~d~(~a~)"
+                              (cl-markless-components:size option)
+                              (cl-markless-components:unit option))))
+               (cl-markless-components:height-option
+                (setf (plump-dom:attribute element "height")
+                      (format NIL "~d~(~a~)"
+                              (cl-markless-components:size option)
+                              (cl-markless-components:unit option))))
+               (cl-markless-components:float-option
+                (setf (plump-dom:attribute element "style")
+                      (format NIL "float:~(~a~)" (cl-markless-components:direction option))))))))
+
 (defun parse (text &optional (markup (config :markup)))
   (ecase markup
     ((:plain 0)
@@ -26,7 +63,9 @@
           (3bmd:parse-string-and-print-to-stream text string)))))
     ((:markless 3)
      (cl-markless:output
-      text
+      (cl-markless:parse
+       text
+       (make-instance 'cl-markless:parser :embed-types (list* 'youtube cl-markless:*default-embed-types*)))
       :target (plump-dom:make-root)
       :format 'cl-markless-plump:plump))))
 
