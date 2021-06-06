@@ -40,7 +40,7 @@
 (defun article-excerpt (article)
   (let* ((article (ensure-article article))
          (lquery:*lquery-master-document* (article-content article))
-         (p (lquery:$1 "p")))
+         (p (lquery:$1 "p" (clone))))
     (unless (lquery:$1 (inline p) "img")
       (let ((img (lquery:$1 "img")))
         (when img
