@@ -262,7 +262,7 @@ article header #rss-link:hover{
     hyphens: none;
 }
 
-#article-body pre code{
+#article-body pre code, #article-body code pre{
     display: block;
     border: 1px solid #0088EE;
     border-left: none;
