@@ -520,7 +520,7 @@ article footer #move .next{
         min-height: 70vh;
     }
     
-    #article-body pre code{
+    #article-body pre code, #article-body code pre{
         margin-right: 0;
     }
 
