@@ -366,7 +366,7 @@ article header #rss-link:hover{
     margin-left: 10px;
 }
 
-article footer{
+article>footer{
     background: #151515;
     color: #FFF;
     max-width: 800px;
@@ -376,18 +376,18 @@ article footer{
     border-top: 3px solid #111;
 }
 
-article footer #default-linkage ul{
+article>footer #default-linkage ul{
     margin: 0; padding: 0;
     margin-top: 5px;
     list-style: none;
     text-align: center;
 }
 
-article footer #default-linkage ul li{
+article>footer #default-linkage ul li{
     display: inline;
 }
 
-article footer #default-linkage ul li a{
+article>footer #default-linkage ul li a{
     display: inline-block;
     color: #AAA;
     background: #101010;
@@ -396,19 +396,19 @@ article footer #default-linkage ul li a{
     padding: 2px 5px 2px 5px;
 }
 
-article footer #default-linkage ul li a:hover{
+article>footer #default-linkage ul li a:hover{
     color: #FFF;
     background: #555;
 }
 
-article footer #move{
+article>footer #move{
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
 }
 
-article footer #move a{
+article>footer #move a{
     color: #FFF;
     text-decoration: none;
     display: inline-block;
@@ -417,7 +417,7 @@ article footer #move a{
     flex-grow: 1;
 }
 
-article footer #move .prev{
+article>footer #move .prev{
     text-align: left;
     background: -moz-linear-gradient(left,  rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,1)), color-stop(100%,rgba(0,0,0,0)));
@@ -428,7 +428,7 @@ article footer #move .prev{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=1 );
 }
 
-article footer #move .next{
+article>footer #move .next{
     text-align: right;
     background: -moz-linear-gradient(left,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1)));
@@ -437,6 +437,13 @@ article footer #move .next{
     background: -ms-linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
     background: linear-gradient(to right,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 );
+}
+
+article footer.footnotes{
+    font-size: 0.9em;
+    background: none;
+    color: inherit;
+    border: none;
 }
 
 @media (max-width: 800px){
@@ -524,7 +531,7 @@ article footer #move .next{
         margin-right: 0;
     }
 
-    article footer{
+    article>footer{
         max-width: none;
     }
 }
@@ -547,7 +554,7 @@ article footer #move .next{
         font-size: 16pt;
     }
     
-    #article-body,#writer-body,#generic-body,article footer{
+    #article-body,#writer-body,#generic-body,article>footer{
         max-width: 1000px;
     }
 }
