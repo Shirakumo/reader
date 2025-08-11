@@ -1,6 +1,6 @@
 About Reader
 ------------
-Reader is a simple blogging platform for [Radiance](https://github.com/Shinmera/Radiance).
+Reader is a simple blogging platform for [Radiance](https://shinmera.com/project/Radiance).
 
 How To
 ------
@@ -8,7 +8,7 @@ Set up Radiance and load Reader through Quicklisp or ASDF. Reader occupies the s
 
 Install
 -------
-0. Make sure the [Shirakumo dist](https://github.com/Shirakumo/dist) is installed and [Radiance](https://github.com/Shinmera/Radiance) is set up.
+0. Make sure the [Shirakumo dist](https://shirakumo.org/project/dist) is installed and [Radiance](https://shinmera.com/project/Radiance) is set up.
 1. Load reader: `(ql:quickload :reader)`
 2. Set the title: `(setf (radiance:mconfig :reader :title) "My Fancy Blog")`
 3. Start radiance: `(radiance:startup)`
